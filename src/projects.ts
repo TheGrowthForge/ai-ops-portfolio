@@ -7,6 +7,10 @@ export type Project = {
   evidence: string[];
   sensitiveDetailsRemoved: string;
   bestFor: string[];
+  visualType?: "policy-system" | "job-control" | "compact";
+  visualTitle?: string;
+  visualSummary?: string;
+  visualPoints?: string[];
 };
 
 export const projects: Project[] = [
@@ -29,8 +33,12 @@ export const projects: Project[] = [
       "Shows ability to turn a fragmented domain into a usable operating surface.",
     ],
     sensitiveDetailsRemoved:
-      "Private source notes, commercial strategy, outreach data, prospect details, and internal fulfilment material are not public.",
+      "Private source notes, commercial strategy, outreach records, and internal fulfilment material are not public.",
     bestFor: ["AI deployment", "Regulated workflows", "Trust and safety", "Public-sector technology"],
+    visualType: "policy-system",
+    visualTitle: "Sanitized policy operating surface",
+    visualSummary: "Fake-data mockup showing how sources, review, monitoring, and delivery fit together.",
+    visualPoints: ["Source register", "Review queue", "Policy update", "Delivery workflow"],
   },
   {
     title: "Job Application Control Room",
@@ -53,6 +61,10 @@ export const projects: Project[] = [
     sensitiveDetailsRemoved:
       "No live hiring-process state, personal context, private notes, CV packages, tracker data, or role materials are published.",
     bestFor: ["AI-native operations", "Internal tooling", "Workflow triage", "Founder/operator roles"],
+    visualType: "job-control",
+    visualTitle: "Sanitized workflow control room",
+    visualSummary: "Recreated dashboard with generic role lanes, daily actions, and follow-up prompts.",
+    visualPoints: ["Role queue", "CV lanes", "Daily actions", "Follow-up needed"],
   },
   {
     title: "Personal Command Console",
@@ -74,6 +86,10 @@ export const projects: Project[] = [
     sensitiveDetailsRemoved:
       "Private life context, financial details, personal notes, and business-sensitive planning are not public.",
     bestFor: ["Operations roles", "Chief of staff style work", "Workflow design", "Execution systems"],
+    visualType: "compact",
+    visualTitle: "Command surface pattern",
+    visualSummary: "Priority lanes, project state, decisions, and next-action loops.",
+    visualPoints: ["Priorities", "Project state", "Decision log", "Next actions"],
   },
   {
     title: "Events / Research Console",
@@ -96,6 +112,10 @@ export const projects: Project[] = [
     sensitiveDetailsRemoved:
       "No account data, private browsing data, or personal attendance notes are included.",
     bestFor: ["Research workflows", "Geospatial decision support", "Community building", "Ops tooling"],
+    visualType: "compact",
+    visualTitle: "Research-to-action interface",
+    visualSummary: "Ranked public information, filters, map context, and action links.",
+    visualPoints: ["Public sources", "Relevance score", "Map context", "Action links"],
   },
   {
     title: "Date App / Private GitHub Project",
@@ -117,5 +137,9 @@ export const projects: Project[] = [
     sensitiveDetailsRemoved:
       "Repository internals remain private unless a walkthrough or access is specifically appropriate.",
     bestFor: ["Product execution", "Frontend implementation", "Private project walkthroughs"],
+    visualType: "compact",
+    visualTitle: "Private product build",
+    visualSummary: "Application structure, component work, and local development workflow.",
+    visualPoints: ["TypeScript app", "Components", "Private repo", "Walkthrough available"],
   },
 ];

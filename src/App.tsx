@@ -3,6 +3,7 @@ import {
   BookOpenCheck,
   Boxes,
   BrainCircuit,
+  CheckCircle2,
   Download,
   ExternalLink,
   Github,
@@ -18,6 +19,13 @@ const linkedinUrl = "https://www.linkedin.com/in/luke-thegrowthforge/";
 const caseStudyUrl = "/case-studies/CASE_STUDY_AI_WORKFLOW_OPERATING_SYSTEM.pdf";
 
 const projectIcons = [ShieldCheck, PanelTop, BrainCircuit, Map, Boxes];
+const flowSteps = [
+  "Messy inputs",
+  "AI workflow",
+  "Human review",
+  "Operating surface",
+  "Action loop",
+];
 
 function App() {
   return (
@@ -59,20 +67,7 @@ function App() {
           </div>
         </div>
 
-        <aside className="proof-panel" aria-label="Portfolio proof points">
-          <div className="proof-row">
-            <span>5</span>
-            <p>sanitized project examples</p>
-          </div>
-          <div className="proof-row">
-            <span>1</span>
-            <p>downloadable AI workflow case study</p>
-          </div>
-          <div className="proof-row">
-            <span>0</span>
-            <p>private trackers or sensitive workspace files</p>
-          </div>
-        </aside>
+        <ArchitectureFlow />
       </section>
 
       <section className="links-band" aria-label="Profile links">
@@ -86,6 +81,17 @@ function App() {
           linkedin.com/in/luke-thegrowthforge
           <ExternalLink size={15} aria-hidden="true" />
         </a>
+      </section>
+
+      <section className="visual-note" aria-label="How to read the visuals">
+        <div>
+          <CheckCircle2 size={19} aria-hidden="true" />
+          <strong>How to read the visuals:</strong>
+        </div>
+        <p>
+          Mockups are recreated with fake labels and sanitized data. They show architecture and workflow judgement, not
+          private dashboards, live records, or internal project files.
+        </p>
       </section>
 
       <section className="section" id="projects">
@@ -170,6 +176,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       </div>
 
+      {project.visualType && <ProjectVisual project={project} />}
+
       <div className="project-section">
         <h4>Problem</h4>
         <p>{project.problem}</p>
@@ -209,6 +217,134 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         ))}
       </div>
     </article>
+  );
+}
+
+function ArchitectureFlow() {
+  return (
+    <aside className="architecture-panel" aria-label="Sanitized workflow architecture diagram">
+      <div className="architecture-header">
+        <span>Operating system pattern</span>
+        <strong>Recreated visual</strong>
+      </div>
+      <div className="flow-list">
+        {flowSteps.map((step, index) => (
+          <div className="flow-step" key={step}>
+            <div className="flow-node">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{step}</strong>
+            </div>
+            {index < flowSteps.length - 1 && <div className="flow-arrow" aria-hidden="true" />}
+          </div>
+        ))}
+      </div>
+      <div className="architecture-surface">
+        <div className="surface-toolbar">
+          <span />
+          <span />
+          <span />
+          <strong>decision surface</strong>
+        </div>
+        <div className="surface-grid">
+          <div>
+            <small>Source register</small>
+            <strong>Traceable notes</strong>
+          </div>
+          <div>
+            <small>Review queue</small>
+            <strong>Human checks</strong>
+          </div>
+          <div>
+            <small>Next action</small>
+            <strong>Follow-up loop</strong>
+          </div>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+function ProjectVisual({ project }: { project: Project }) {
+  if (project.visualType === "policy-system") {
+    return <SystemMockup project={project} variant="policy" />;
+  }
+
+  if (project.visualType === "job-control") {
+    return <SystemMockup project={project} variant="job" />;
+  }
+
+  return <MiniDashboardPreview project={project} />;
+}
+
+function SystemMockup({ project, variant }: { project: Project; variant: "policy" | "job" }) {
+  const isPolicy = variant === "policy";
+  const primaryRows = isPolicy
+    ? [
+        ["Source register", "Referenced", "Ready"],
+        ["Policy update", "Review", "Today"],
+        ["Claim note", "Needs caveat", "Check"],
+      ]
+    : [
+        ["Role queue", "Prioritise", "Today"],
+        ["CV lane", "Tailor", "Next"],
+        ["Follow-up needed", "Draft", "Ready"],
+      ];
+  const sideItems = isPolicy
+    ? ["Monitoring", "Review queue", "Delivery workflow"]
+    : ["Daily actions", "Outreach prompt", "Portfolio asset"];
+
+  return (
+    <div className={`system-mockup ${isPolicy ? "policy-mockup" : "job-mockup"}`}>
+      <div className="mockup-copy">
+        <h4>{project.visualTitle}</h4>
+        <p>{project.visualSummary}</p>
+      </div>
+      <div className="mockup-window" aria-label={`${project.title} sanitized visual mockup`}>
+        <div className="mockup-bar">
+          <span />
+          <span />
+          <span />
+          <strong>{isPolicy ? "policy ops" : "workflow ops"}</strong>
+        </div>
+        <div className="mockup-body">
+          <div className="mockup-main">
+            {primaryRows.map(([label, status, action]) => (
+              <div className="mockup-row" key={label}>
+                <div>
+                  <strong>{label}</strong>
+                  <small>{status}</small>
+                </div>
+                <span>{action}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mockup-side">
+            {sideItems.map((item) => (
+              <div key={item}>
+                <small>{item}</small>
+                <span />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MiniDashboardPreview({ project }: { project: Project }) {
+  return (
+    <div className="mini-preview" aria-label={`${project.title} sanitized visual summary`}>
+      <div>
+        <h4>{project.visualTitle}</h4>
+        <p>{project.visualSummary}</p>
+      </div>
+      <div className="mini-tiles">
+        {project.visualPoints?.map((point) => (
+          <span key={point}>{point}</span>
+        ))}
+      </div>
+    </div>
   );
 }
 

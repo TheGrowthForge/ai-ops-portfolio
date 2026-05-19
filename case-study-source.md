@@ -37,4 +37,4 @@ Many teams now need this kind of internal work: taking scattered AI experiments 
 
 ## Sanitization Note
 
-Private source notes, prospect details, internal strategy, and operating materials are intentionally excluded from this public case study.
+Private source notes, outreach records, internal strategy, and operating materials are intentionally excluded from this public case study.

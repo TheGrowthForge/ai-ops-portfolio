@@ -14,6 +14,7 @@
   --green-soft: #e7f5ef;
   --amber: #9a5b00;
   --amber-soft: #fff2d7;
+  --ink-soft: #182235;
   --shadow: 0 18px 50px rgba(17, 24, 39, 0.08);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -98,7 +99,7 @@ main {
 .hero {
   display: grid;
   gap: clamp(28px, 5vw, 80px);
-  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 560px);
   min-height: 560px;
   padding: clamp(56px, 9vw, 108px) clamp(20px, 4vw, 52px) 52px;
   scroll-margin-top: 120px;
@@ -184,41 +185,160 @@ h1 {
   min-width: 150px;
 }
 
-.proof-panel {
+.architecture-panel {
   align-self: start;
-  background: var(--surface);
+  background: #101827;
   border: 1px solid var(--border);
   border-radius: 8px;
   box-shadow: var(--shadow);
+  color: #fff;
+  overflow: hidden;
+  padding: 18px;
+}
+
+.architecture-header,
+.mockup-bar,
+.surface-toolbar {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.architecture-header {
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.architecture-header span,
+.architecture-header strong {
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.architecture-header span {
+  color: #9fb0c7;
+  font-weight: 760;
+}
+
+.architecture-header strong {
+  background: rgba(142, 209, 178, 0.12);
+  border: 1px solid rgba(142, 209, 178, 0.24);
+  border-radius: 999px;
+  color: #8ed1b2;
+  padding: 5px 8px;
+}
+
+.flow-list {
   display: grid;
-  gap: 1px;
+  gap: 8px;
+}
+
+.flow-step {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 22px;
+}
+
+.flow-step:last-child {
+  grid-template-columns: 1fr;
+}
+
+.flow-node {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+
+.flow-node span {
+  color: #8ed1b2;
+  font-size: 0.72rem;
+  font-weight: 820;
+}
+
+.flow-node strong {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+
+.flow-arrow {
+  align-self: center;
+  background: linear-gradient(90deg, #8ed1b2, rgba(142, 209, 178, 0));
+  height: 2px;
+  position: relative;
+}
+
+.flow-arrow::after {
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid #8ed1b2;
+  border-top: 5px solid transparent;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -4px;
+}
+
+.architecture-surface {
+  background: #f8fafc;
+  border-radius: 8px;
+  color: var(--text);
+  margin-top: 18px;
   overflow: hidden;
 }
 
-.proof-row {
-  background: #fff;
+.surface-toolbar {
+  background: #e8edf4;
+  border-bottom: 1px solid #cfd8e4;
+  padding: 10px 12px;
+}
+
+.surface-toolbar span,
+.mockup-bar span {
+  background: #94a3b8;
+  border-radius: 999px;
+  height: 8px;
+  width: 8px;
+}
+
+.surface-toolbar strong {
+  color: #64748b;
+  font-size: 0.72rem;
+  margin-left: auto;
+  text-transform: uppercase;
+}
+
+.surface-grid {
   display: grid;
-  gap: 14px;
-  grid-template-columns: 64px 1fr;
-  padding: 24px;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 12px;
 }
 
-.proof-row + .proof-row {
-  border-top: 1px solid var(--border);
+.surface-grid div {
+  background: #fff;
+  border: 1px solid #d9e0e8;
+  border-radius: 7px;
+  min-height: 82px;
+  padding: 10px;
 }
 
-.proof-row span {
-  font-size: 2.2rem;
-  font-weight: 820;
-  letter-spacing: 0;
-  line-height: 1;
+.surface-grid small,
+.mockup-row small,
+.mockup-side small {
+  color: var(--faint);
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 720;
 }
 
-.proof-row p {
-  align-self: center;
-  color: var(--muted);
-  line-height: 1.45;
-  margin: 0;
+.surface-grid strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-top: 10px;
 }
 
 .links-band {
@@ -245,8 +365,32 @@ h1 {
   color: var(--text);
 }
 
+.visual-note {
+  align-items: center;
+  background: #eef7f2;
+  border-bottom: 1px solid #cce8dc;
+  color: #195b48;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(210px, max-content) minmax(0, 1fr);
+  padding: 14px clamp(20px, 4vw, 52px);
+}
+
+.visual-note div {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.visual-note p {
+  color: #386b5d;
+  line-height: 1.45;
+  margin: 0;
+}
+
 .section {
   padding: 68px clamp(20px, 4vw, 52px);
+  scroll-margin-top: 120px;
 }
 
 .section-heading {
@@ -293,6 +437,10 @@ h1 {
   grid-column: 1 / -1;
 }
 
+.project-card:nth-child(2) {
+  border-color: #b7d9cb;
+}
+
 .project-top {
   display: grid;
   gap: 14px;
@@ -315,6 +463,145 @@ h1 {
   letter-spacing: 0;
   line-height: 1.05;
   margin-bottom: 8px;
+}
+
+.system-mockup,
+.mini-preview {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.system-mockup {
+  background: #f8fafc;
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+}
+
+.mockup-copy {
+  border-right: 1px solid var(--border);
+  padding: 18px;
+}
+
+.mockup-copy h4,
+.mini-preview h4 {
+  color: var(--text);
+  font-size: 0.92rem;
+  margin-bottom: 7px;
+}
+
+.mockup-copy p,
+.mini-preview p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.mockup-window {
+  background: var(--surface);
+}
+
+.mockup-bar {
+  background: #111827;
+  color: #cbd5e1;
+  padding: 10px 12px;
+}
+
+.mockup-bar strong {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  margin-left: auto;
+  text-transform: uppercase;
+}
+
+.mockup-body {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(140px, 0.8fr);
+  padding: 14px;
+}
+
+.mockup-main,
+.mockup-side {
+  display: grid;
+  gap: 9px;
+}
+
+.mockup-row {
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.mockup-row strong {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.mockup-row span {
+  background: var(--blue-soft);
+  border-radius: 999px;
+  color: var(--blue);
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  font-weight: 780;
+  padding: 5px 8px;
+}
+
+.job-mockup .mockup-row span {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.mockup-side div {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  min-height: 56px;
+  padding: 10px;
+}
+
+.mockup-side span {
+  background: linear-gradient(90deg, #9fb6e7, rgba(159, 182, 231, 0.25));
+  border-radius: 999px;
+  display: block;
+  height: 7px;
+  margin-top: 12px;
+}
+
+.job-mockup .mockup-side span {
+  background: linear-gradient(90deg, #8ed1b2, rgba(142, 209, 178, 0.25));
+}
+
+.mini-preview {
+  align-items: center;
+  background: #f9fafc;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  padding: 16px;
+}
+
+.mini-tiles {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mini-tiles span {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: #3d4857;
+  font-size: 0.76rem;
+  font-weight: 760;
+  padding: 9px;
 }
 
 .project-card p,
@@ -467,13 +754,15 @@ li + li {
     min-height: auto;
   }
 
-  .proof-panel {
+  .architecture-panel {
     max-width: 520px;
   }
 
   .section-heading,
   .project-grid,
-  .principle-list {
+  .principle-list,
+  .system-mockup,
+  .visual-note {
     grid-template-columns: 1fr;
   }
 
@@ -484,6 +773,15 @@ li + li {
   .case-study-section {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .mockup-copy {
+    border-bottom: 1px solid var(--border);
+    border-right: 0;
+  }
+
+  .mockup-body {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -516,9 +814,37 @@ li + li {
     width: 100%;
   }
 
-  .proof-row {
-    grid-template-columns: 48px 1fr;
-    padding: 18px;
+  .architecture-panel {
+    padding: 14px;
+  }
+
+  .flow-step,
+  .flow-step:last-child {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-arrow {
+    height: 16px;
+    justify-self: start;
+    margin-left: 18px;
+    width: 2px;
+    background: linear-gradient(180deg, #8ed1b2, rgba(142, 209, 178, 0));
+  }
+
+  .flow-arrow::after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #8ed1b2;
+    border-bottom: 0;
+    left: -4px;
+    right: auto;
+    top: 10px;
+  }
+
+  .surface-grid,
+  .mini-preview,
+  .mini-tiles {
+    grid-template-columns: 1fr;
   }
 
   .project-card {
