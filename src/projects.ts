@@ -95,6 +95,16 @@ export const featuredProject: Project = {
       alt: "Call console operating surface",
       caption: "Call console",
     },
+    {
+      src: "/proof/school-policy-architecture-public.png",
+      alt: "School policy workspace architecture map",
+      caption: "Architecture map",
+    },
+    {
+      src: "/proof/school-policy-call-ritual-actual.png",
+      alt: "Call ritual prompt surface",
+      caption: "Call ritual",
+    },
   ],
   workflow: [
     "context files",
@@ -108,50 +118,149 @@ export const featuredProject: Project = {
 
 export const projects: Project[] = [
   {
-    slug: "job-search-control-room",
-    title: "Job Search Control Room",
+    slug: "date-app",
+    title: "Date App Prototype",
+    eyebrow: "Product prototype",
+    purpose:
+      "A private Next.js/Supabase product prototype with shared planning, deck flows, ideas, memories, notes, and motion-led interaction surfaces — a deliberately different style from the ops consoles.",
+    accent: "#a14b54",
+    stack: ["Next.js", "React", "TypeScript", "Supabase", "Tailwind", "Motion", "Netlify"],
+    story: {
+      why:
+        "Shared plans, memories, notes, and date ideas usually live across chats, lists, and photo rolls. The prototype explores what a more intentional shared product surface could feel like.",
+      built:
+        "A private Next.js/Supabase app with shared planning routes, idea and deck flows, memories, notes, profile settings, storage, and motion-led UI.",
+      proves:
+        "It shows range: routed product surfaces and database-backed features, not only internal tools.",
+    },
+    buildDetails: [
+      "Next.js App Router structure with multiple product routes.",
+      "Supabase-backed schema for ideas, memories, ratings, bucket items, and photos.",
+      "Motion-heavy product UI, with private content removed from portfolio captures.",
+    ],
+    proofPoints: [
+      "Real full-stack structure: routes, components, hooks, and deployment config.",
+      "A different visual register from the ops consoles.",
+      "Private app, walkable without exposing personal data.",
+    ],
+    galleryFocus: "Home, tonight, together, deck, and shared planning surfaces.",
+    walkthroughNotes: [
+      "Start with the home and tonight surfaces to see the product direction.",
+      "Move into Together and Deck to see the routed interaction model.",
+    ],
+    privacyNote: "Screenshots are selected product surfaces. Private notes, media, credentials, and database values are not included.",
+    images: [
+      {
+        src: "/proof/date-app-home-experience.png",
+        alt: "Date App home product surface",
+        caption: "Home surface",
+      },
+      {
+        src: "/proof/date-app-tonight-experience.png",
+        alt: "Date App tonight picker product surface",
+        caption: "Tonight picker",
+      },
+      {
+        src: "/proof/date-app-together-experience.png",
+        alt: "Date App together planning surface",
+        caption: "Together surface",
+      },
+      {
+        src: "/proof/date-app-deck-experience.png",
+        alt: "Date App deck interaction surface",
+        caption: "Deck surface",
+      },
+    ],
+    workflow: ["identity", "home", "tonight picker", "shared deck", "memories", "storage"],
+  },
+  {
+    slug: "command-centre",
+    title: "Personal Command Centre",
+    eyebrow: "Operating system",
+    purpose:
+      "A hosted personal operating layer for orienting, reviewing, and acting across active goals, notes, reference material, routines, and business/personal contexts.",
+    accent: "#c8922d",
+    stack: ["Next.js", "Supabase", "React", "TypeScript", "Tailwind", "Hosted beta"],
+    story: {
+      why:
+        "Most personal productivity systems collapse because context, decisions, review queues, and action surfaces live in different places. I built one command layer to keep orientation and execution together.",
+      built:
+        "A hosted command centre with personal/business shells, goal stacks, notes, reference surfaces, routine modules, and a review queue backed by structured data.",
+      proves:
+        "It shows I treat my own life and work like a designed operating system: persistent context, routed surfaces, and clean action loops.",
+    },
+    buildDetails: [
+      "Hosted daily layer that pulls goals, review, action, notes, and reference into one interface.",
+      "Separate personal and business command contexts without mixing the underlying operating surfaces.",
+      "Built as a live tool rather than a portfolio mockup.",
+    ],
+    proofPoints: [
+      "Real hosted interface with desktop and mobile surfaces.",
+      "Shows the same system-building instinct applied to personal operations.",
+      "Connects goals, notes, reference material, and review queues into one action layer.",
+    ],
+    galleryFocus: "Hosted command shell, personal dashboard, routine module, and mobile view.",
+    walkthroughNotes: [
+      "Start with the command shell to see the high-level operating layer.",
+      "Move into the personal surface to see how review, notes, goals, and reference come together.",
+    ],
+    privacyNote: "Screenshots show the interface shape. Sensitive personal details and raw decision logs are not included.",
+    images: [
+      {
+        src: "/proof/command-centre-live.png",
+        alt: "Command Centre landing surface",
+        caption: "Command shell",
+      },
+      {
+        src: "/proof/command-centre-personal.png",
+        alt: "Personal Command Centre review surface",
+        caption: "Personal surface",
+      },
+    ],
+    workflow: ["orient", "review", "prioritise", "route context", "act", "capture"],
+  },
+  {
+    slug: "opportunity-pipeline-console",
+    title: "Opportunity Pipeline Console",
     eyebrow: "Workflow console",
     purpose:
-      "A local React/Vite console that turns a multi-lane job search into one daily action queue — role priorities, CV variants, outreach prompts, and application notes in a single surface.",
+      "A private React/Vite console pattern for turning a messy, multi-source opportunity pipeline into daily actions, priority lanes, research prompts, and follow-up loops.",
     accent: "#75702c",
     stack: ["React", "Vite", "TypeScript", "CSS", "CSV parsing", "Markdown"],
     story: {
       why:
-        "A serious job search scatters context across tabs, notes, spreadsheets, and one-off AI chats. The console turns that sprawl into one visible operating rhythm.",
+        "High-context opportunity work scatters across tabs, notes, spreadsheets, and AI chats. The console pattern turns that sprawl into one visible operating rhythm.",
       built:
-        "A local React/Vite control room for daily actions, application queues, CV lanes, research prompts, and outreach — backed directly by source CSV and Markdown files.",
+        "A local React/Vite control room pattern for daily actions, queue state, research notes, outreach prompts, and follow-up cadence backed by source CSV and Markdown files.",
       proves:
-        "It shows I build a tool around a real workflow in days, then actually run on it.",
+        "It shows I build tools around real workflows quickly, and I keep the source-of-truth files close to the interface.",
     },
     buildDetails: [
       "Reads source CSV and Markdown files directly as display surfaces.",
-      "Daily action queue and role-priority lanes.",
-      "CV-variant guidance and outreach prompts in one console.",
+      "Daily action queue, priority lanes, and follow-up prompts in one local interface.",
+      "Kept private because the underlying data is live and personal to the workflow.",
     ],
     proofPoints: [
       "A working local app, not a static mockup.",
-      "No separate database — it reads the source files directly, so it can't drift.",
-      "Built fast, then used every day to run the search.",
+      "No separate database — it reads source files directly, so the interface can't quietly drift.",
+      "Useful as a reusable console pattern for research, sales, customer success, or operations pipelines.",
     ],
-    galleryFocus: "Today view, priority lane, CV lanes, action queue, and follow-up prompts.",
+    galleryFocus: "Private console pattern; public portfolio shows the architecture rather than the live data surface.",
     walkthroughNotes: [
-      "The Today view turns the whole search into a short action list.",
-      "The screenshots show how application work stays visible instead of scattered.",
+      "The underlying data is intentionally not shown publicly.",
+      "The reusable pattern is the important part: source files, priority queue, follow-up loop, and daily operating surface.",
     ],
-    privacyNote: "Real applications, contacts, and private CV content are excluded.",
-    images: [
-      {
-        src: "/proof/job-search-control-room-public.png",
-        alt: "Job Search Control Room Today dashboard",
-        caption: "Today view",
-      },
-      {
-        src: "/proof/job-search-control-room-priority-public.png",
-        alt: "Job Search Control Room priority lane dashboard",
-        caption: "Priority lane",
-      },
+    privacyNote: "The live console screenshots are not published because they expose current pipeline structure and private action data.",
+    images: [],
+    workspaceMap: [
+      "source CSV",
+      "Markdown notes",
+      "priority lanes",
+      "daily queue",
+      "research prompts",
+      "follow-up loop",
     ],
-    workflow: ["research", "triage", "tailor", "apply", "track", "follow up"],
+    workflow: ["source files", "triage", "prioritise", "action queue", "follow up", "review"],
   },
   {
     slug: "events-console",
@@ -193,51 +302,6 @@ export const projects: Project[] = [
       },
     ],
     workflow: ["public sources", "score", "filter", "map", "shortlist", "act"],
-  },
-  {
-    slug: "date-app",
-    title: "Date App Prototype",
-    eyebrow: "Product prototype",
-    purpose:
-      "A private Next.js/Supabase product prototype with shared planning, deck flows, ideas, memories, notes, and motion-led interaction surfaces — a deliberately different style from the ops consoles.",
-    accent: "#a14b54",
-    stack: ["Next.js", "React", "TypeScript", "Supabase", "Tailwind", "Motion", "Netlify"],
-    story: {
-      why:
-        "Shared plans, memories, notes, and date ideas usually live across chats, lists, and photo rolls. The prototype explores what a more intentional shared product surface could feel like.",
-      built:
-        "A private Next.js/Supabase app with shared planning routes, idea and deck flows, memories, notes, profile settings, storage, and motion-led UI.",
-      proves:
-        "It shows range: routed product surfaces and database-backed features, not only internal tools.",
-    },
-    buildDetails: [
-      "Next.js App Router structure with multiple product routes.",
-      "Supabase-backed schema for ideas, memories, ratings, bucket items, and photos.",
-      "Motion-heavy product UI, with private content removed from portfolio captures.",
-    ],
-    proofPoints: [
-      "Real full-stack structure: routes, components, hooks, and deployment config.",
-      "A different visual register from the ops consoles.",
-      "Private app, walkable without exposing personal data.",
-    ],
-    galleryFocus: "Home and tonight-picker product surfaces, plus route/component architecture.",
-    walkthroughNotes: [
-      "The screenshots show the real product direction and interaction loop.",
-    ],
-    privacyNote: "Screenshots are sanitized. Personal names, media, notes, and database values are not included.",
-    images: [
-      {
-        src: "/proof/date-app-home-actual.png",
-        alt: "Sanitized Date App home screen",
-        caption: "Home surface",
-      },
-      {
-        src: "/proof/date-app-tonight-actual.png",
-        alt: "Sanitized Date App tonight picker screen",
-        caption: "Tonight picker",
-      },
-    ],
-    workflow: ["identity", "home", "tonight picker", "shared deck", "memories", "storage"],
   },
 ];
 

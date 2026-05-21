@@ -22,9 +22,9 @@ const LAB_TABS: Array<{
     key: "queue",
     label: "Action queue",
     sub: "scattered work becomes one list",
-    project: "Job Search Control Room",
+    project: "Opportunity Pipeline Console",
     explain:
-      "A real search sprawls across tabs, spreadsheets and chats. The console collapses it into one Today list with a visible finish line — the same shape as the operations dashboards I build for the business.",
+      "High-context opportunity work sprawls across tabs, spreadsheets and chats. The console collapses it into one Today list with a visible finish line — the same shape as the operations dashboards I build for the business.",
   },
   {
     key: "triage",
@@ -92,11 +92,11 @@ function SourceReviewLab() {
 /* ---------- 2. action queue ---------- */
 
 const TASKS = [
-  "Tailor the CV for the AI-ops role",
-  "Send three follow-up emails",
-  "Research two target companies",
-  "Update the application tracker",
-  "Prep answers for Thursday's call",
+  "Review the priority lane",
+  "Send three follow-up messages",
+  "Research two target accounts",
+  "Update the source tracker",
+  "Prep notes for Thursday's call",
 ];
 
 function ActionQueueLab() {
@@ -119,7 +119,7 @@ function ActionQueueLab() {
         <div className="lab-progress" aria-hidden="true">
           <span style={{ width: `${(count / TASKS.length) * 100}%` }} />
         </div>
-        <p className="lab-hint">Tick items off — the whole search collapses into one short list you can finish.</p>
+        <p className="lab-hint">Tick items off — the whole pipeline collapses into one short list you can finish.</p>
         <div className="lab-rows">
           {TASKS.map((task, index) => (
             <button

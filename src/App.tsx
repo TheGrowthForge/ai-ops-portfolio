@@ -127,9 +127,7 @@ function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage)
   const flagshipImage = featuredProject.images[1] ?? featuredProject.images[0];
   const proofWallImages = [
     featuredProject.images[0],
-    projects[0]?.images[0],
-    projects[1]?.images[0],
-    projects[2]?.images[0],
+    ...projects.flatMap((project) => project.images.slice(0, 1)).slice(0, 3),
   ].filter((image): image is ProjectImage => Boolean(image));
   const capabilityLabels = ["context architecture", "source review", "operating consoles", "product surfaces"];
 
@@ -172,7 +170,7 @@ function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage)
           <BrowserFrame image={flagshipImage} large />
         </button>
         <div className="lab-board compact-lab-board">
-          <FactTile label="Live" value="schoolaipolicy.co.uk" />
+          <FactTile label="Live website" value="schoolaipolicy.co.uk" href="https://www.schoolaipolicy.co.uk" />
           <FactTile label="Regulated domain" value="DfE · JCQ · ICO aligned" />
           {proofWallImages.map((image) => (
             <button className="proof-wall-shot evidence-button" key={image.src} onClick={() => onOpenImage(image)} type="button">
@@ -186,13 +184,24 @@ function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage)
   );
 }
 
-function FactTile({ label, value }: { label: string; value: string }) {
-  return (
-    <article className="evidence-tile fact-tile">
+function FactTile({ label, value, href }: { label: string; value: string; href?: string }) {
+  const content = (
+    <>
       <span className="fact-label">{label}</span>
       <strong className="fact-value">{value}</strong>
-    </article>
+    </>
   );
+
+  if (href) {
+    return (
+      <a className="evidence-tile fact-tile fact-link" href={href} target="_blank" rel="noreferrer">
+        {content}
+        <ArrowUpRight size={15} aria-hidden="true" />
+      </a>
+    );
+  }
+
+  return <article className="evidence-tile fact-tile">{content}</article>;
 }
 
 function FeaturedSystem({
@@ -321,9 +330,13 @@ function ProjectGalleryCard({
   onOpenProject: (project: Project) => void;
 }) {
   const primaryImage = project.images[0];
+  const singleVisual = project.images.length <= 1;
 
   return (
-    <article className={`project-card project-card-${project.slug}`} style={{ "--project-accent": project.accent } as React.CSSProperties}>
+    <article
+      className={`project-card project-card-${project.slug}${singleVisual ? " project-card-single-visual" : ""}`}
+      style={{ "--project-accent": project.accent } as React.CSSProperties}
+    >
       <div className="project-card-header">
         <span className="eyebrow">{project.eyebrow}</span>
         <h3>{project.title}</h3>
@@ -348,7 +361,7 @@ function ProjectGalleryCard({
         ))}
       </div>
 
-      {project.images.length > 1 ? <ScreenshotStrip images={project.images} onOpenImage={onOpenImage} /> : null}
+      {project.images.length > 1 ? <ScreenshotStrip images={project.images.slice(1, 4)} onOpenImage={onOpenImage} /> : null}
       <div className="gallery-focus">
         <Images size={16} aria-hidden="true" />
         <span>{project.galleryFocus}</span>

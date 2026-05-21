@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import {
   Braces,
   CheckCircle2,
+  CircleSlash,
   FileText,
   GitBranch,
   Layers3,
@@ -15,6 +16,15 @@ import { AgentSessionDemo } from "./AgentSessionDemo";
 
 type StudioStepKey = "brief" | "context" | "rules" | "build" | "review" | "ship";
 
+const comparisonRows = [
+  ["Blank chat box", "Project folder with working context"],
+  ["Repeated prompt tricks", "Persistent rules, docs, and decisions"],
+  ["One-off outputs", "Operating surfaces that keep state"],
+  ["Copy/paste workflow", "Tool-connected execution loop"],
+  ["Lost history", "Session wrap and handover memory"],
+  ["Hope the answer is right", "Source discipline and human review"],
+];
+
 const studioSteps: Array<{
   key: StudioStepKey;
   label: string;
@@ -24,75 +34,75 @@ const studioSteps: Array<{
 }> = [
   {
     key: "brief",
-    label: "brief",
-    title: "Turn a loose idea into a system boundary.",
+    label: "scope",
+    title: "Define the system before asking the model to work.",
     body:
-      "Start by defining what the project is allowed to become: public portfolio, private source repos, no invented metrics, screenshot review before deploy.",
-    log: ["scope: public evidence lab", "boundary: source repos stay private", "output: inspectable project surface"],
+      "The first job is not writing the perfect prompt. It is setting the boundary: what the workspace is, what it knows, what it can touch, and what must stay private.",
+    log: ["define public / private boundary", "map current project state", "set output and review criteria"],
   },
   {
     key: "context",
     label: "context",
     title: "Give the agent persistent project memory.",
     body:
-      "Context files make the workspace legible before any model starts editing: project rules, handover state, proof assets, current visual direction.",
-    log: ["read AGENTS.md", "read context/handover.md", "map src + public/proof", "detect dirty working tree"],
+      "The model becomes much stronger when the workspace carries the business logic, architecture, prior decisions, proof assets, and current state before the next instruction is even written.",
+    log: ["read AGENTS.md", "read context/handover.md", "load project rules", "map src + public/proof"],
   },
   {
     key: "rules",
     label: "rules",
-    title: "Install rules that survive the session.",
+    title: "Turn repeated judgement into workspace rules.",
     body:
-      "Local skills turn repeated judgement into reusable operating procedure: audit the workspace, wrap the session, preserve the public/private boundary.",
-    log: ["load .agents/skills/workspace-audit", "load .agents/skills/session-wrap", "apply no-deploy-without-approval rule"],
+      "If a constraint matters more than once, it should live in the workspace: no deploy without review, preserve other agents' work, audit proof assets, wrap the session for continuity.",
+    log: ["load /workspace-audit", "load /session-wrap", "enforce no-deploy-without-approval"],
   },
   {
     key: "build",
     label: "build",
     title: "Use agents as builders, not chat boxes.",
     body:
-      "The portfolio itself is a composed system: React components, screenshot curation, CSS visual language, browser QA, and Netlify deployment discipline.",
-    log: ["implement isolated component", "preserve Claude edits", "append scoped CSS", "keep app single-page"],
+      "The work then becomes normal engineering: components, data models, screenshots, CSS systems, browser QA, privacy scans, and deployment discipline.",
+    log: ["implement scoped component", "preserve parallel edits", "test rendered interface"],
   },
   {
     key: "review",
     label: "review",
-    title: "Put a gate between AI output and public proof.",
+    title: "Put a gate between model output and reality.",
     body:
-      "Every useful build still needs human review. The audit gate checks build output, missing assets, privacy terms, stale handover, and visual quality.",
+      "The point is not autonomous chaos. The point is leverage with control: source review, visual QA, build checks, privacy scanning, and human sign-off before public output.",
     log: ["npm run build", "asset references exist", "privacy scan", "manual screenshot review"],
   },
   {
     key: "ship",
     label: "ship",
-    title: "Only publish after the workspace says it is ready.",
+    title: "Ship from an understood workspace.",
     body:
-      "The deployment boundary is explicit. Local experiments can move quickly; GitHub and Netlify only happen after review and direct approval.",
-    log: ["commit intentionally", "push only on approval", "deploy Netlify only on approval", "record handover"],
+      "The output is not a lucky answer from a clever prompt. It is a shipped surface produced by a workspace that holds context, constraints, tools, and review memory.",
+    log: ["commit intentionally", "push after approval", "deploy after approval", "record handover"],
   },
 ];
 
 const architectureNodes = [
-  { label: "AGENTS.md", body: "shared rules for Codex and Claude", icon: FileText },
-  { label: "context/handover.md", body: "persistent session memory", icon: GitBranch },
-  { label: ".agents/skills", body: "repeatable audit and wrap workflows", icon: Terminal },
-  { label: "public/proof", body: "curated project evidence layer", icon: Layers3 },
-  { label: "src components", body: "portfolio-as-product interface", icon: Braces },
-  { label: "review gate", body: "privacy, build, and visual QA before deploy", icon: ShieldCheck },
+  { label: "AGENTS.md", body: "how the agent should behave in this workspace", icon: FileText },
+  { label: "context files", body: "business logic, current state, decisions, handover", icon: GitBranch },
+  { label: "skills + hooks", body: "repeatable audit, wrap, review, and safety routines", icon: Terminal },
+  { label: "source register", body: "evidence layer for claims, policy, and decisions", icon: Layers3 },
+  { label: "working code", body: "React surfaces, data flows, screenshots, deploy config", icon: Braces },
+  { label: "review gate", body: "human QA before public output or deployment", icon: ShieldCheck },
 ];
 
 const capabilityCards = [
   {
-    label: "Workspace audit",
-    text: "Runs build, checks proof assets, scans for private terms, and reports visual drift before publishing.",
+    label: "Persistent context",
+    text: "The agent starts with the business, codebase, visual direction, and current handover already loaded.",
   },
   {
-    label: "Session wrap",
-    text: "Captures what changed, what is still risky, and where the next agent should start.",
+    label: "Operational memory",
+    text: "Important decisions and constraints survive the current chat, so the next session does not restart from zero.",
   },
   {
-    label: "Proof curation",
-    text: "Turns real private builds into public-safe evidence without exposing the source workspace.",
+    label: "Review discipline",
+    text: "AI accelerates the work, but source checks, privacy scans, and visual QA decide what gets published.",
   },
 ];
 
@@ -107,19 +117,25 @@ export function AISystemsStudio() {
     <section className="studio-section" id="studio">
       <div className="studio-shell">
         <div className="studio-intro">
-          <span className="eyebrow">AI systems studio</span>
-          <h2>The portfolio is part of the proof.</h2>
+          <span className="eyebrow">Beyond prompting</span>
+          <h2>The workspace is the prompt.</h2>
           <p>
-            This site is not just a gallery. It is a working example of how I now build: context-rich
-            workspaces, explicit agent rules, local skills, proof assets, review gates, and a clear
-            public/private boundary.
+            Most people still use AI transactionally: blank box, clever prompt, isolated output, reset.
+            My approach is to build persistent AI workspaces where the model has project context before
+            it acts.
+          </p>
+          <p>
+            The portfolio itself is part of that proof: real project surfaces, agent rules, source
+            discipline, local skills, review gates, and a public/private boundary designed into the
+            workspace.
           </p>
           <div className="studio-receipts" aria-label="AI systems studio receipts">
-            <span>React/Vite interface</span>
-            <span>Local agent skills</span>
-            <span>Screenshot proof layer</span>
-            <span>Review-before-deploy gate</span>
+            <span>persistent context</span>
+            <span>agent rules</span>
+            <span>tool-connected workflows</span>
+            <span>human review gates</span>
           </div>
+          <blockquote>AI should not be used like a slot machine.</blockquote>
         </div>
 
         <div className="studio-console" aria-label="AI-native build loop">
@@ -127,7 +143,28 @@ export function AISystemsStudio() {
             <span />
             <span />
             <span />
-            <strong>ai-native build loop</strong>
+            <strong>prompting versus workspace architecture</strong>
+          </div>
+
+          <div className="studio-comparison" aria-label="Transactional AI compared with AI-native workspaces">
+            <div className="studio-compare-col is-weak">
+              <div className="studio-compare-head">
+                <CircleSlash size={15} aria-hidden="true" />
+                <strong>prompt slot machine</strong>
+              </div>
+              {comparisonRows.map(([weak]) => (
+                <span key={weak}>{weak}</span>
+              ))}
+            </div>
+            <div className="studio-compare-col is-strong">
+              <div className="studio-compare-head">
+                <Sparkles size={15} aria-hidden="true" />
+                <strong>AI-native workspace</strong>
+              </div>
+              {comparisonRows.map(([, strong]) => (
+                <span key={strong}>{strong}</span>
+              ))}
+            </div>
           </div>
 
           <div className="studio-loop" role="tablist" aria-label="AI systems build loop">
@@ -172,8 +209,8 @@ export function AISystemsStudio() {
         <div className="studio-map" aria-label="Portfolio workspace architecture">
           <div className="studio-core">
             <Sparkles size={18} aria-hidden="true" />
-            <strong>portfolio workspace</strong>
-            <span>agent-ready, review-gated, public-safe</span>
+            <strong>agent-ready workspace</strong>
+            <span>context, rules, tools, source discipline, memory, review</span>
           </div>
           {architectureNodes.map((node) => {
             const Icon = node.icon;
@@ -194,7 +231,7 @@ export function AISystemsStudio() {
             <LockKeyhole size={18} aria-hidden="true" />
             <div>
               <span className="eyebrow">What this demonstrates</span>
-              <h3>Architecture around AI, not just AI usage.</h3>
+              <h3>Architecture around AI, not prompt collection.</h3>
             </div>
           </div>
           {capabilityCards.map((card) => (
