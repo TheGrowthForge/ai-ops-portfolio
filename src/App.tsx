@@ -124,7 +124,6 @@ function SiteHeader() {
 }
 
 function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage) => void }) {
-  const flagshipImage = featuredProject.images[1] ?? featuredProject.images[0];
   const proofWallImages = [
     featuredProject.images[0],
     ...projects.flatMap((project) => project.images.slice(0, 1)).slice(0, 3),
@@ -166,9 +165,6 @@ function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage)
       </div>
 
       <div className="hero-evidence-panel" aria-label="Evidence lab preview">
-        <button className="hero-flagship-shot" onClick={() => onOpenImage(flagshipImage)} type="button">
-          <BrowserFrame image={flagshipImage} large />
-        </button>
         <div className="lab-board compact-lab-board">
           <FactTile label="Live website" value="schoolaipolicy.co.uk" href="https://www.schoolaipolicy.co.uk" />
           <FactTile label="Regulated domain" value="DfE · JCQ · ICO aligned" />

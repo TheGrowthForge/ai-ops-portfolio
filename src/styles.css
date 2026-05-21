@@ -450,32 +450,10 @@ p {
 
 .hero-evidence-panel {
   align-content: start;
+  align-self: start;
   display: grid;
   gap: 14px;
-  grid-template-rows: auto auto;
   min-width: 0;
-}
-
-.hero-flagship-shot {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow-soft);
-  cursor: zoom-in;
-  min-width: 0;
-  overflow: hidden;
-  padding: 12px;
-  text-align: left;
-  transition: transform 0.2s var(--ease);
-}
-
-.hero-flagship-shot:hover {
-  transform: translateY(-3px);
-}
-
-.hero-flagship-shot .browser-frame.large img {
-  aspect-ratio: 16 / 9.9;
-  min-height: 0;
 }
 
 .lab-board {
@@ -2193,11 +2171,8 @@ p {
 .hero-copy > div:nth-child(2) {
   animation-delay: 0.16s;
 }
-.hero-flagship-shot {
-  animation-delay: 0.24s;
-}
 .hero-evidence-panel .lab-board {
-  animation-delay: 0.34s;
+  animation-delay: 0.24s;
 }
 
 /* ---------- AI systems studio ---------- */
