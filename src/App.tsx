@@ -72,7 +72,7 @@ function App() {
   return (
     <main>
       <SiteHeader />
-      <HeroEvidenceBoard onOpenImage={setLightboxImage} />
+      <HeroEvidenceBoard />
       <AISystemsStudio />
       <FeaturedSystem project={featuredProject} onOpenImage={setLightboxImage} onOpenProject={setSelectedProject} />
       <ProjectGallery projects={projects} onOpenImage={setLightboxImage} onOpenProject={setSelectedProject} />
@@ -123,11 +123,7 @@ function SiteHeader() {
   );
 }
 
-function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage) => void }) {
-  const proofWallImages = [
-    featuredProject.images[0],
-    ...projects.flatMap((project) => project.images.slice(0, 1)).slice(0, 3),
-  ].filter((image): image is ProjectImage => Boolean(image));
+function HeroEvidenceBoard() {
   const capabilityLabels = ["context architecture", "source review", "operating consoles", "product surfaces"];
 
   return (
@@ -163,41 +159,8 @@ function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage)
           </div>
         </div>
       </div>
-
-      <div className="hero-evidence-panel" aria-label="Evidence lab preview">
-        <div className="lab-board compact-lab-board">
-          <FactTile label="Live website" value="schoolaipolicy.co.uk" href="https://www.schoolaipolicy.co.uk" />
-          <FactTile label="Regulated domain" value="DfE · JCQ · ICO aligned" />
-          {proofWallImages.map((image) => (
-            <button className="proof-wall-shot evidence-button" key={image.src} onClick={() => onOpenImage(image)} type="button">
-              <img alt={image.alt} src={image.src} />
-              <span>{image.caption}</span>
-            </button>
-          ))}
-        </div>
-      </div>
     </section>
   );
-}
-
-function FactTile({ label, value, href }: { label: string; value: string; href?: string }) {
-  const content = (
-    <>
-      <span className="fact-label">{label}</span>
-      <strong className="fact-value">{value}</strong>
-    </>
-  );
-
-  if (href) {
-    return (
-      <a className="evidence-tile fact-tile fact-link" href={href} target="_blank" rel="noreferrer">
-        {content}
-        <ArrowUpRight size={15} aria-hidden="true" />
-      </a>
-    );
-  }
-
-  return <article className="evidence-tile fact-tile">{content}</article>;
 }
 
 function FeaturedSystem({
