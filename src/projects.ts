@@ -11,7 +11,6 @@ export type Project = {
   purpose: string;
   accent: string;
   stack: string[];
-  receipts: string[];
   story: {
     why: string;
     built: string;
@@ -33,42 +32,37 @@ export type Project = {
 
 export const featuredProject: Project = {
   slug: "school-policy",
-  title: "UK School AI Policy Operating System",
+  title: "UK School AI Policy — Operating System",
   eyebrow: "Flagship build",
   purpose:
-    "A public school AI policy site connected to private operating surfaces for sources, workstreams, outreach, business state, and human-reviewed AI work.",
-  accent: "#2563eb",
+    "A public marketing site wired to five private operating surfaces — dashboard, business overview, call console, architecture map, and a source-review workflow — for a regulated advisory business.",
+  accent: "#ad3f17",
   stack: ["Static HTML", "Netlify", "Formspree", "Attio", "Apollo", "AI agents", "Markdown"],
-  receipts: [
-    "Live public website at schoolaipolicy.co.uk.",
-    "Private dashboard, business overview, call console, architecture view, and source-review workflow.",
-    "Workspace designed so AI agents recover business context, rules, and source boundaries before producing work.",
-  ],
   story: {
     why:
-      "I built this to turn the anxiety around AI use in UK schools into a concrete operating workflow: sources, claims, decisions, follow-up, and delivery all visible in one system.",
+      "AI guidance for UK schools is scattered across several regulators and changes often. I built an operating system that turns that ambiguity into repeatable work: sources, claims, decisions, outreach, and delivery all visible in one place.",
     built:
-      "A public-facing site plus private operating views for workstreams, school outreach, call preparation, source discipline, business state, and agent-assisted drafting.",
+      "A public-facing site for the offer, plus private surfaces for workstream state, source discipline, call preparation, business overview, and agent-assisted drafting.",
     proves:
-      "I can structure a regulated, ambiguous domain into a usable operating system with AI support and human review built into the process.",
+      "It shows I can take a regulated, ambiguous domain and stand up the whole operating system — public site, internal surfaces, source discipline, human review — not just a single document.",
   },
   buildDetails: [
-    "Public website for the offer and lead capture.",
-    "Dashboard and business overview for workstream state.",
-    "Call console and source-review workflow for practical execution.",
+    "Public marketing site for the offer and lead capture.",
+    "Dashboard and business overview for live workstream state.",
+    "Call console and source-review workflow for day-to-day execution.",
   ],
   proofPoints: [
-    "Real public website plus private console surfaces.",
-    "Source and claim review treated as first-class workflow objects.",
-    "AI agents guided by workspace context before producing output.",
+    "One public marketing site plus five private operating surfaces, all live.",
+    "Every regulatory claim tracked in a source register and a claims register.",
+    "AI agents draft and structure; claims and policy language clear human review before release.",
   ],
-  galleryFocus: "Public website, private dashboard, business overview, call console, and architecture view.",
+  galleryFocus: "Public website, dashboard, business overview, call console, and industry map.",
   walkthroughNotes: [
-    "Start with the public site to understand the offer.",
-    "Move into dashboard/call-console screens to see how the work is executed.",
-    "Use the source-review and architecture screenshots to show how claims move toward human sign-off.",
+    "Start with the public site to see the offer.",
+    "Move into the dashboard and call console to see how the work is executed.",
+    "Use the source-review and map surfaces to see how claims move toward human sign-off.",
   ],
-  privacyNote: "Private school/prospect data is not included. Screenshots are selected operating surfaces only.",
+  privacyNote: "No private school or prospect data is shown. Screenshots are selected operating surfaces only; some content is redacted.",
   links: [
     {
       label: "Open live website",
@@ -78,28 +72,28 @@ export const featuredProject: Project = {
   images: [
     {
       src: "/proof/school-policy-site.png",
-      alt: "Public School AI Policy website homepage",
+      alt: "Public School AI Policy marketing website homepage",
       caption: "Live public website",
     },
     {
-      src: "/proof/school-policy-dashboard-actual.png",
-      alt: "UK School AI Policy private dashboard surface",
-      caption: "Private dashboard",
-    },
-    {
       src: "/proof/school-policy-business-overview-actual.png",
-      alt: "UK School AI Policy business overview surface",
+      alt: "Business overview operating surface",
       caption: "Business overview",
     },
     {
-      src: "/proof/school-policy-call-console-actual.png",
-      alt: "UK School AI Policy call console surface",
-      caption: "Call console",
+      src: "/proof/school-policy-industry-map-actual.png",
+      alt: "Industry and regulator map operating surface",
+      caption: "Industry map",
     },
     {
-      src: "/proof/school-policy-architecture-actual.png",
-      alt: "UK School AI Policy architecture view",
-      caption: "Architecture view",
+      src: "/proof/school-policy-dashboard-public.png",
+      alt: "Private operating dashboard surface",
+      caption: "Operating dashboard",
+    },
+    {
+      src: "/proof/school-policy-call-console-public.png",
+      alt: "Call console operating surface",
+      caption: "Call console",
     },
   ],
   workflow: [
@@ -118,46 +112,41 @@ export const projects: Project[] = [
     title: "Job Search Control Room",
     eyebrow: "Workflow console",
     purpose:
-      "A local React/Vite console for daily actions, role queues, CV lanes, outreach prompts, portfolio assets, and application notes.",
-    accent: "#0f766e",
+      "A local React/Vite console that turns a multi-lane job search into one daily action queue — role priorities, CV variants, outreach prompts, and application notes in a single surface.",
+    accent: "#75702c",
     stack: ["React", "Vite", "TypeScript", "CSS", "CSV parsing", "Markdown"],
-    receipts: [
-      "Runs locally as a daily job-search operating surface.",
-      "Uses source Markdown/CSV files without editing them from the UI.",
-      "Turns scattered applications, links, and CV variants into one execution queue.",
-    ],
     story: {
       why:
-        "I needed a calmer way to run a serious job search without scattering context across tabs, notes, spreadsheets, and one-off AI chats.",
+        "A serious job search scatters context across tabs, notes, spreadsheets, and one-off AI chats. The console turns that sprawl into one visible operating rhythm.",
       built:
-        "A local React/Vite control room for daily actions, application queues, CV lanes, research prompts, outreach, and portfolio assets.",
+        "A local React/Vite control room for daily actions, application queues, CV lanes, research prompts, and outreach — backed directly by source CSV and Markdown files.",
       proves:
-        "I build tools around my own workflows quickly, then use them to make repeated execution easier and less chaotic.",
+        "It shows I build a tool around a real workflow in days, then actually run on it.",
     },
     buildDetails: [
-      "CSV and Markdown-backed read-only display surfaces.",
-      "Daily action queue and role-priority views.",
-      "CV/version guidance and outreach prompts in one console.",
+      "Reads source CSV and Markdown files directly as display surfaces.",
+      "Daily action queue and role-priority lanes.",
+      "CV-variant guidance and outreach prompts in one console.",
     ],
     proofPoints: [
-      "Local working app, not a static mockup.",
-      "Workflow constraints prevent endless overbuilding.",
-      "Useful example of product thinking applied to operations.",
+      "A working local app, not a static mockup.",
+      "No separate database — it reads the source files directly, so it can't drift.",
+      "Built fast, then used every day to run the search.",
     ],
     galleryFocus: "Today view, priority lane, CV lanes, action queue, and follow-up prompts.",
     walkthroughNotes: [
-      "Show how the Today view turns the search into a short action list.",
-      "Use the screenshots to show how the console keeps application work visible.",
+      "The Today view turns the whole search into a short action list.",
+      "The screenshots show how application work stays visible instead of scattered.",
     ],
     privacyNote: "Real applications, contacts, and private CV content are excluded.",
     images: [
       {
-        src: "/proof/job-search-control-room-today.png",
+        src: "/proof/job-search-control-room-public.png",
         alt: "Job Search Control Room Today dashboard",
-        caption: "Today dashboard",
+        caption: "Today view",
       },
       {
-        src: "/proof/job-search-control-room-intelligence.png",
+        src: "/proof/job-search-control-room-priority-public.png",
         alt: "Job Search Control Room priority lane dashboard",
         caption: "Priority lane",
       },
@@ -165,91 +154,37 @@ export const projects: Project[] = [
     workflow: ["research", "triage", "tailor", "apply", "track", "follow up"],
   },
   {
-    slug: "command-centre",
-    title: "Command Centre: Agent Workspace Architecture",
-    eyebrow: "Workspace system",
-    purpose:
-      "A thin personal operating layer that keeps profile context, priorities, tooling defaults, tracking, decisions, and workspace routing explicit.",
-    accent: "#7c3aed",
-    stack: ["Markdown", "AGENTS.md", "Context files", "Decision logs", "Workspace routing"],
-    receipts: [
-      "Uses AGENTS.md as the canonical operating policy.",
-      "Separates durable personal context from business/project workspaces.",
-      "Defines how agents read context, clarify output, execute, verify, and update state.",
-    ],
-    story: {
-      why:
-        "I wanted my AI-assisted work to have memory, boundaries, and routing instead of every session starting from scratch.",
-      built:
-        "A workspace architecture around operating rules, profile context, priorities, tooling defaults, tracking, decisions, and project-specific workspaces.",
-      proves:
-        "I think about AI as an operating environment: context design, rules, routing, review, and handoff matter as much as the prompt.",
-    },
-    buildDetails: [
-      "Agent operating instructions and context files.",
-      "Separate durable context from project workspaces.",
-      "Routing rules for risky changes, new ideas, and execution tasks.",
-    ],
-    proofPoints: [
-      "Shows AI-native workspace architecture rather than isolated prompting.",
-      "Makes review and verification part of the working loop.",
-      "Useful for multi-project continuity and safer agent collaboration.",
-    ],
-    galleryFocus: "Agent routing map and workspace-context flow.",
-    walkthroughNotes: [
-      "Use this as the architecture proof for how the other projects stay understandable to agents.",
-      "The workflow strip shows how incoming work is routed before execution starts.",
-    ],
-    privacyNote: "Sensitive personal context, private decisions, and raw logs are not shown.",
-    images: [],
-    workspaceMap: [
-      "AGENTS.md",
-      "context/profile",
-      "context/priorities",
-      "context/tooling",
-      "context/tracking",
-      "context/decisions",
-      "workspaces/",
-    ],
-    workflow: ["read context", "clarify deliverable", "work in right workspace", "verify", "update context"],
-  },
-  {
     slug: "events-console",
     title: "Events / Research Console",
     eyebrow: "Research surface",
     purpose:
-      "A local browser console that ranks events and research leads with filters, score rings, map context, public source links, and action cues.",
-    accent: "#ea580c",
+      "A single-file local console that ranks events and research leads with filters, score rings, map context, public source links, and clear action cues.",
+    accent: "#b06a1e",
     stack: ["HTML", "CSS", "JavaScript", "Leaflet", "Public event sources"],
-    receipts: [
-      "Complete single-file local app with ranked cards, filters, map, and source links.",
-      "Turns public research into a shortlist instead of another pile of tabs.",
-      "Shows ranking, location, urgency, and actionability in one surface.",
-    ],
     story: {
       why:
-        "Research gets wasted when useful opportunities sit in a pile of tabs. I built a console that makes event and lead research easier to compare.",
+        "Event and lead research gets wasted when useful opportunities sit in a pile of tabs. This console turns public-source research into a ranked queue that can be compared and acted on.",
       built:
-        "A local map-and-card interface with filters, scoring, location context, source links, and visible action cues.",
+        "A local map-and-card interface with filters, scoring, location context, source links, and visible action cues — all in one portable file.",
       proves:
-        "I can turn research into an operational surface: ranking, filtering, and decision support instead of passive notes.",
+        "It shows I turn raw research into a ranked decision queue, not another pile of notes.",
     },
     buildDetails: [
-      "Map-led browser interface using Leaflet.",
-      "Ranked cards with filters and source links.",
+      "Map-led browser interface built with Leaflet.",
+      "Ranked cards with filters and public source links.",
       "Single-file local app for fast iteration and portability.",
     ],
     proofPoints: [
-      "Strong visual proof through map, cards, and filters.",
-      "Transforms public-source research into a decision queue.",
-      "Good example of lightweight tooling for messy discovery work.",
+      "Strong visual surface: map, ranked cards, and filters together.",
+      "Turns public-source research into a triaged shortlist.",
+      "Lightweight tooling sized to messy discovery work.",
     ],
     galleryFocus: "Map view, ranked event cards, filters, and source/action cues.",
     walkthroughNotes: [
-      "Open the screenshot first because it is the most visual project surface.",
-      "Use the screenshot to show filtering and score-based triage.",
+      "Open the screenshot first — it is the most visual surface in the set.",
+      "It shows filtering and score-based triage in one view.",
     ],
-    privacyNote: "Only public-style event examples are represented in the portfolio.",
+    privacyNote: "Only public-style event examples are represented here.",
     images: [
       {
         src: "/proof/events-console-actual.png",
@@ -264,36 +199,30 @@ export const projects: Project[] = [
     title: "Date App Prototype",
     eyebrow: "Product prototype",
     purpose:
-      "A private Next.js/Supabase product prototype with shared planning, deck flows, ideas, memories, notes, profile settings, and motion-heavy interaction surfaces.",
-    accent: "#db2777",
+      "A private Next.js/Supabase product prototype with shared planning, deck flows, ideas, memories, notes, and motion-led interaction surfaces — a deliberately different style from the ops consoles.",
+    accent: "#a14b54",
     stack: ["Next.js", "React", "TypeScript", "Supabase", "Tailwind", "Motion", "Netlify"],
-    receipts: [
-      "Full Next.js App Router project with real routes, components, hooks, and deployment config.",
-      "Supabase schema/storage model for ideas, memories, ratings, bucket items, and photos.",
-      "Private because the content is personal; walkthrough available without exposing the repo.",
-    ],
     story: {
       why:
-        "I wanted to build a product prototype that was more emotional and interaction-heavy than an ops dashboard, while still using a real app architecture.",
+        "Shared plans, memories, notes, and date ideas usually live across chats, lists, and photo rolls. The prototype explores what a more intentional shared product surface could feel like.",
       built:
-        "A private Next.js/Supabase app with shared planning routes, idea/deck flows, memories, notes, profile settings, storage, and motion-led UI.",
+        "A private Next.js/Supabase app with shared planning routes, idea and deck flows, memories, notes, profile settings, storage, and motion-led UI.",
       proves:
-        "I can build beyond internal tools: routed product surfaces, database-backed features, and polished interaction loops.",
+        "It shows range: routed product surfaces and database-backed features, not only internal tools.",
     },
     buildDetails: [
       "Next.js App Router structure with multiple product routes.",
       "Supabase-backed schema for ideas, memories, ratings, bucket items, and photos.",
-      "Motion-heavy product UI with private content removed from portfolio captures.",
+      "Motion-heavy product UI, with private content removed from portfolio captures.",
     ],
     proofPoints: [
-      "Shows product execution and full-stack structure.",
-      "Demonstrates a different visual style from the ops consoles.",
-      "Private app can be walked through without exposing personal data.",
+      "Real full-stack structure: routes, components, hooks, and deployment config.",
+      "A different visual register from the ops consoles.",
+      "Private app, walkable without exposing personal data.",
     ],
     galleryFocus: "Home and tonight-picker product surfaces, plus route/component architecture.",
     walkthroughNotes: [
-      "Use the screenshots to show the real product direction.",
-      "Use the screenshots to show the product direction and interaction loop.",
+      "The screenshots show the real product direction and interaction loop.",
     ],
     privacyNote: "Screenshots are sanitized. Personal names, media, notes, and database values are not included.",
     images: [
@@ -308,38 +237,109 @@ export const projects: Project[] = [
         caption: "Tonight picker",
       },
     ],
-    workspaceMap: [
-      "app/home",
-      "app/tonight",
-      "app/together",
-      "app/deck",
-      "app/memories",
-      "components/",
-      "supabase/schema",
-    ],
     workflow: ["identity", "home", "tonight picker", "shared deck", "memories", "storage"],
   },
 ];
 
-export const aiWorkingPrinciples = [
+export type OperatingPillar = { title: string; body: string };
+
+export const operatingPillars: OperatingPillar[] = [
   {
-    title: "Context first",
+    title: "A written constitution",
     body:
-      "I make the workspace legible before asking an agent to act: rules, current state, business context, source boundaries, and handoff notes live where the agent can recover them.",
+      "A root operating file sets the principles, an authority model, and a strict source-of-truth order. When two files disagree, resolution is deterministic — not a guess.",
   },
   {
-    title: "Operating surfaces",
+    title: "Guardrails, not good intentions",
     body:
-      "The output is usually a dashboard, queue, console, or review surface. I want the next action to be visible without opening ten tabs.",
+      "Pre-action hooks block whole classes of mistake before they happen: committing secrets, destructive database or file operations, edits to protected files, and language that breaks domain rules.",
   },
   {
-    title: "Human review loop",
+    title: "Layered, single-source state",
     body:
-      "AI can draft, structure, inspect, and accelerate work. Claims, policy language, outreach decisions, and sensitive actions still pass through deliberate human review.",
+      "Context is organised into layers with one rule each. Underneath them all: the agent can find exactly one answer per question, so it never acts on a stale copy.",
   },
   {
-    title: "Persistent memory",
+    title: "Derived, not authored",
     body:
-      "I keep decisions, priorities, source assumptions, and project state in durable files so long-running work does not reset every time a new agent session starts.",
+      "Facts live once in canonical files. Every dashboard and console is rendered from them, so the tooling can't quietly drift away from the truth.",
+  },
+  {
+    title: "Built for the long run",
+    body:
+      "An append-only decision log, cross-session memory, and a handover file mean session two hundred starts with the same context as session two.",
+  },
+  {
+    title: "Right tool for each job",
+    body:
+      "Deterministic checks run as scripts. Judgement work runs as custom commands the agent invokes — a workspace audit that catches drift, an end-of-session review that updates state. Each does what it's good at.",
+  },
+];
+
+export const workspaceTree: Array<{ name: string; note: string }> = [
+  { name: "CONSTITUTION.md", note: "operating rules · authority model · source-of-truth order" },
+  { name: "context/", note: "canonical state — one fact, one home" },
+  { name: "decisions/", note: "append-only log — every change carries its rationale" },
+  { name: "queues/", note: "active · blocked · backlog — the single task home" },
+  { name: "knowledge/", note: "durable references and repeatable procedures" },
+  { name: "hooks/", note: "guardrails that run before and after every action" },
+];
+
+export const enforcementHooks: Array<{ event: string; rule: string }> = [
+  { event: "PreToolUse", rule: "block edits to protected files" },
+  { event: "PreToolUse", rule: "block secret leaks before they reach a commit" },
+  { event: "PreToolUse", rule: "block destructive database / file operations" },
+  { event: "PostToolUse", rule: "flag language that breaks domain rules" },
+  { event: "Stop", rule: "require a state update when outputs changed" },
+];
+
+export const customSkills: Array<{ name: string; rule: string }> = [
+  { name: "/workspace-audit", rule: "scan for broken references, naming drift, and decision conflicts" },
+  { name: "/session-wrap", rule: "review the session, update canonical state, catch what drifted" },
+];
+
+export type SessionStep = {
+  phase: string;
+  line: string;
+  detail: string;
+  state: "read" | "work" | "block" | "gate" | "ship";
+};
+
+export const sessionSteps: SessionStep[] = [
+  {
+    phase: "context",
+    line: "Agent loads the constitution and canonical state",
+    detail: "operating rules · current state · open decisions · task queues",
+    state: "read",
+  },
+  {
+    phase: "propose",
+    line: "Drafts a change to a policy document",
+    detail: "edit prepared in memory — nothing written yet",
+    state: "work",
+  },
+  {
+    phase: "guard",
+    line: "Attempts to stage every file, including .env",
+    detail: "blocked — a pre-commit hook fires before the secret can leak",
+    state: "block",
+  },
+  {
+    phase: "adjust",
+    line: "Agent re-routes and stages only the intended files",
+    detail: "the secret never reaches version control",
+    state: "work",
+  },
+  {
+    phase: "review",
+    line: "Change held at the human-review gate",
+    detail: "claims and policy language need a person to sign off",
+    state: "gate",
+  },
+  {
+    phase: "ship",
+    line: "Approved, shipped, state updated",
+    detail: "decision log and memory written for the next session",
+    state: "ship",
   },
 ];

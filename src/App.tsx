@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   ArrowUpRight,
-  BookOpenCheck,
   BrainCircuit,
   Download,
   Github,
@@ -12,7 +11,15 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import { aiWorkingPrinciples, featuredProject, projects, type Project, type ProjectImage } from "./projects";
+import {
+  featuredProject,
+  projects,
+  type Project,
+  type ProjectImage,
+} from "./projects";
+import { AISystemsStudio } from "./AISystemsStudio";
+import { InteractiveLab } from "./InteractiveLab";
+import { useModal } from "./useModal";
 
 const githubUrl = "https://github.com/TheGrowthForge";
 const linkedinUrl = "https://www.linkedin.com/in/luke-thegrowthforge/";
@@ -22,6 +29,8 @@ const emailHref = "mailto:lukejthomas412@gmail.com";
 function App() {
   const [lightboxImage, setLightboxImage] = useState<ProjectImage | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const closeLightbox = useCallback(() => setLightboxImage(null), []);
+  const closeProject = useCallback(() => setSelectedProject(null), []);
 
   useEffect(() => {
     document.documentElement.style.overflowY = "auto";
@@ -35,23 +44,48 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+    document.documentElement.classList.add("reveal-on");
+    const targets = document.querySelectorAll(
+      ".section-heading, .featured-layout, .agent-demo, .project-card, .contact-intro",
+    );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14, rootMargin: "0px 0px -7% 0px" },
+    );
+    targets.forEach((target) => observer.observe(target));
+    return () => {
+      observer.disconnect();
+      document.documentElement.classList.remove("reveal-on");
+    };
+  }, []);
+
   return (
     <main>
       <SiteHeader />
       <HeroEvidenceBoard onOpenImage={setLightboxImage} />
+      <AISystemsStudio />
       <FeaturedSystem project={featuredProject} onOpenImage={setLightboxImage} onOpenProject={setSelectedProject} />
       <ProjectGallery projects={projects} onOpenImage={setLightboxImage} onOpenProject={setSelectedProject} />
-      <WalkthroughIndex onOpenImage={setLightboxImage} onOpenProject={setSelectedProject} />
-      <WorkspaceArchitecture />
+      <InteractiveLab />
       <ContactSection />
       {selectedProject ? (
         <ProjectDetailDrawer
           project={selectedProject}
-          onClose={() => setSelectedProject(null)}
+          onClose={closeProject}
           onOpenImage={setLightboxImage}
         />
       ) : null}
-      {lightboxImage ? <ProjectLightbox image={lightboxImage} onClose={() => setLightboxImage(null)} /> : null}
+      {lightboxImage ? <ProjectLightbox image={lightboxImage} onClose={closeLightbox} /> : null}
     </main>
   );
 }
@@ -61,13 +95,13 @@ function SiteHeader() {
     <header className="site-header">
       <a className="brand" href="#top" aria-label="Luke Thomas portfolio home">
         <span className="brand-mark">LT</span>
-        <span>Project Lab</span>
+        <span>Luke Thomas</span>
       </a>
       <nav className="nav-links" aria-label="Primary navigation">
         <a href="#featured">Featured</a>
+        <a href="#studio">Studio</a>
         <a href="#projects">Projects</a>
-        <a href="#play">Walkthroughs</a>
-        <a href="#ai-workflow">AI workflow</a>
+        <a href="#lab">Lab</a>
         <a href={githubUrl} target="_blank" rel="noreferrer">
           <Github size={16} aria-hidden="true" />
           GitHub
@@ -82,7 +116,7 @@ function SiteHeader() {
         </a>
         <a href={caseStudyUrl}>
           <Download size={16} aria-hidden="true" />
-          CV / Case study
+          Case study
         </a>
       </nav>
     </header>
@@ -93,9 +127,9 @@ function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage)
   const flagshipImage = featuredProject.images[1] ?? featuredProject.images[0];
   const proofWallImages = [
     featuredProject.images[0],
-    projects[0].images[0],
-    projects[2].images[0],
-    projects[3].images[0],
+    projects[0]?.images[0],
+    projects[1]?.images[0],
+    projects[2]?.images[0],
   ].filter((image): image is ProjectImage => Boolean(image));
   const capabilityLabels = ["context architecture", "source review", "operating consoles", "product surfaces"];
 
@@ -103,11 +137,15 @@ function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage)
     <section className="hero evidence-hero" id="top">
       <div className="hero-copy">
         <div>
-          <p className="eyebrow">Luke Thomas / AI-native systems builder</p>
+          <p className="eyebrow">Luke Thomas — AI operations &amp; workflow builder</p>
           <h1>Systems I built with AI, context, and code.</h1>
           <p>
-            A project lab of real surfaces, private workflow consoles, source-led operating systems, and project
-            walkthroughs. The work is built to be inspected, not just described.
+            I help teams turn AI from scattered experiments into working business processes — by
+            engineering the systems, not just the prompts. This is a lab of real, working surfaces,
+            built to be inspected rather than described.
+          </p>
+          <p className="availability-chip">
+            Open to AI operations, workflow &amp; applied-AI roles · Kent / London / remote
           </p>
         </div>
         <div>
@@ -118,16 +156,12 @@ function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage)
           </div>
           <div className="hero-actions">
             <a className="primary-action" href="#featured">
-              View flagship
+              See the flagship build
               <MoveRight size={17} aria-hidden="true" />
             </a>
-            <a className="tertiary-action" href="#play">
-              View walkthroughs
-              <MoveRight size={17} aria-hidden="true" />
-            </a>
-            <a className="secondary-action" href={caseStudyUrl}>
-              <BookOpenCheck size={17} aria-hidden="true" />
-              Case study PDF
+            <a className="secondary-action" href={emailHref}>
+              <Mail size={17} aria-hidden="true" />
+              Get in touch
             </a>
           </div>
         </div>
@@ -138,8 +172,8 @@ function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage)
           <BrowserFrame image={flagshipImage} large />
         </button>
         <div className="lab-board compact-lab-board">
-          <EvidenceTile label="systems built" value="5" />
-          <EvidenceTile label="live public site" value="1" />
+          <FactTile label="Live" value="schoolaipolicy.co.uk" />
+          <FactTile label="Regulated domain" value="DfE · JCQ · ICO aligned" />
           {proofWallImages.map((image) => (
             <button className="proof-wall-shot evidence-button" key={image.src} onClick={() => onOpenImage(image)} type="button">
               <img alt={image.alt} src={image.src} />
@@ -152,20 +186,11 @@ function HeroEvidenceBoard({ onOpenImage }: { onOpenImage: (image: ProjectImage)
   );
 }
 
-function ProofWallShot({ image, wide = false }: { image: ProjectImage; wide?: boolean }) {
+function FactTile({ label, value }: { label: string; value: string }) {
   return (
-    <article className={`proof-wall-shot ${wide ? "wide" : ""}`}>
-      <img alt={image.alt} src={image.src} />
-      <span>{image.caption}</span>
-    </article>
-  );
-}
-
-function EvidenceTile({ label, value }: { label: string; value: string }) {
-  return (
-    <article className="evidence-tile">
-      <strong>{value}</strong>
-      <span>{label}</span>
+    <article className="evidence-tile fact-tile">
+      <span className="fact-label">{label}</span>
+      <strong className="fact-value">{value}</strong>
     </article>
   );
 }
@@ -179,7 +204,7 @@ function FeaturedSystem({
   onOpenImage: (image: ProjectImage) => void;
   onOpenProject: (project: Project) => void;
 }) {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const activeImage = project.images[activeIndex] ?? project.images[0];
 
   return (
@@ -214,12 +239,9 @@ function FeaturedSystem({
         </div>
 
         <aside className="project-notes flagship-notes">
+          <ProjectQuickRead project={project} />
           <div>
-            <h3>Why it matters</h3>
-            <p className="note-lede">{project.story.proves}</p>
-          </div>
-          <div>
-            <h3>What this proves</h3>
+            <h3>Receipts</h3>
             <ul>
               {project.proofPoints.map((receipt) => (
                 <li key={receipt}>{receipt}</li>
@@ -267,9 +289,9 @@ function ProjectGallery({
   return (
     <section className="project-section" id="projects">
       <div className="section-heading compact">
-        <span className="eyebrow">More project receipts</span>
+        <span className="eyebrow">Selected project evidence</span>
         <h2>Actual surfaces first. Architecture second.</h2>
-        <p>Each project card leads with something visible: a screenshot, a workspace map, or a product-system preview.</p>
+        <p>Each card leads with a real surface, then explains what the project does and what problem it solves.</p>
       </div>
       <div className="project-grid">
         {columns.map((column, index) => (
@@ -317,6 +339,8 @@ function ProjectGalleryCard({
           <WorkspaceMapPreview project={project} />
         )}
       </div>
+
+      <ProjectQuickRead project={project} compact />
 
       <div className="receipt-list">
         {project.proofPoints.slice(0, 3).map((receipt) => (
@@ -372,10 +396,6 @@ function BrowserFrame({ image, large = false }: { image: ProjectImage; large?: b
   );
 }
 
-function WorkspaceMap({ project }: { project: Project }) {
-  return <WorkspaceMapPreview project={project} />;
-}
-
 function WorkspaceMapPreview({ project }: { project: Project }) {
   const mapItems = project.workspaceMap ?? [];
 
@@ -383,7 +403,7 @@ function WorkspaceMapPreview({ project }: { project: Project }) {
     <div className="workspace-map-preview">
       <div className="map-core">
         <BrainCircuit size={22} aria-hidden="true" />
-        <strong>{project.slug === "command-centre" ? "agent reads context first" : "system map"}</strong>
+        <strong>system map</strong>
       </div>
       <div className="map-connection" aria-hidden="true" />
       <div className="map-spokes">
@@ -399,61 +419,27 @@ function WorkspaceMapPreview({ project }: { project: Project }) {
   );
 }
 
-function WalkthroughIndex({
-  onOpenImage,
-  onOpenProject,
-}: {
-  onOpenImage: (image: ProjectImage) => void;
-  onOpenProject: (project: Project) => void;
-}) {
-  const walkthroughProjects = [featuredProject, ...projects];
+function ProjectQuickRead({ project, compact = false }: { project: Project; compact?: boolean }) {
+  const rows = [
+    {
+      label: "What it does",
+      text: project.story.built,
+    },
+    {
+      label: "What it solves",
+      text: project.story.why,
+    },
+  ];
 
   return (
-    <section className="walkthrough-index-section" id="play">
-      <div className="section-heading compact">
-        <span className="eyebrow">Project walkthroughs</span>
-        <h2>Walkthrough paths for the real systems.</h2>
-        <p>
-          Each walkthrough points to actual project evidence: screenshots, architecture, workflow notes, build details,
-          and the strongest thing to inspect first.
-        </p>
-      </div>
-
-      <div className="walkthrough-grid">
-        {walkthroughProjects.map((project) => {
-          const image = project.images[0];
-          const steps = project.walkthroughNotes?.length ? project.walkthroughNotes : project.proofPoints;
-
-          return (
-            <article className="walkthrough-card" key={project.slug} style={{ "--project-accent": project.accent } as React.CSSProperties}>
-              <div className="walkthrough-visual">
-                {image ? (
-                  <button className="image-button" onClick={() => onOpenImage(image)} type="button">
-                    <img alt={image.alt} src={image.src} />
-                  </button>
-                ) : (
-                  <WorkspaceMapPreview project={project} />
-                )}
-              </div>
-              <div className="walkthrough-copy">
-                <span className="eyebrow">{project.eyebrow}</span>
-                <h3>{project.title}</h3>
-                <p>{project.galleryFocus}</p>
-                <ol className="walkthrough-steps">
-                  {steps.slice(0, 2).map((step) => (
-                    <li key={step}>{step}</li>
-                  ))}
-                </ol>
-                <button className="walkthrough-button" onClick={() => onOpenProject(project)} type="button">
-                  Open walkthrough
-                  <MoveRight size={16} aria-hidden="true" />
-                </button>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
+    <div className={`project-quick-read ${compact ? "compact" : ""}`}>
+      {rows.map((row) => (
+        <article key={row.label}>
+          <span>{row.label}</span>
+          <p>{row.text}</p>
+        </article>
+      ))}
+    </div>
   );
 }
 
@@ -472,48 +458,16 @@ function WorkflowRail({ items }: { items: string[] }) {
   );
 }
 
-function WorkspaceArchitecture() {
-  return (
-    <section className="architecture-section" id="ai-workflow">
-      <div className="section-heading compact">
-        <span className="eyebrow">How I work with AI</span>
-        <h2>The workspace is part of the system.</h2>
-        <p>
-          I design the workspace before I ask an agent to act. Durable context, source boundaries, review loops, and
-          operating surfaces keep the AI useful across long-running projects.
-        </p>
-      </div>
-
-      <div className="principle-grid">
-        {aiWorkingPrinciples.map((principle, index) => (
-          <article key={principle.title}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <h3>{principle.title}</h3>
-            <p>{principle.body}</p>
-          </article>
-        ))}
-      </div>
-
-      <div className="architecture-flow">
-        {["workspace context", "agent rules", "source evidence", "working surface", "human review", "shipped output"].map(
-          (node, index) => (
-            <div key={node}>
-              <small>{String(index + 1).padStart(2, "0")}</small>
-              <strong>{node}</strong>
-            </div>
-          )
-        )}
-      </div>
-    </section>
-  );
-}
-
 function ContactSection() {
   return (
     <footer className="contact-section" id="contact">
-      <div>
-        <span className="eyebrow">Links</span>
-        <h2>Project walkthroughs available without exposing private repos.</h2>
+      <div className="contact-intro">
+        <span className="eyebrow">Get in touch</span>
+        <h2>Luke Thomas — AI operations &amp; workflow builder.</h2>
+        <p>
+          Open to AI operations, workflow, and applied-AI roles — Kent, London, or remote. The work above
+          is built to be inspected; project walkthroughs are available without exposing private repos.
+        </p>
       </div>
       <div className="contact-actions">
         <a href={githubUrl} target="_blank" rel="noreferrer">
@@ -540,12 +494,14 @@ function ContactSection() {
 }
 
 function ProjectLightbox({ image, onClose }: { image: ProjectImage; onClose: () => void }) {
+  const ref = useModal<HTMLDivElement>(onClose);
+
   return (
-    <div className="lightbox" role="dialog" aria-modal="true" aria-label={image.caption} onClick={onClose}>
+    <div className="lightbox" ref={ref} role="dialog" aria-modal="true" aria-label={image.caption} onClick={onClose}>
       <button className="lightbox-close" onClick={onClose} type="button">
         Close
       </button>
-      <img alt={image.alt} src={image.src} />
+      <img alt={image.alt} src={image.src} onClick={(event) => event.stopPropagation()} />
       <p>{image.caption}</p>
     </div>
   );
@@ -561,10 +517,19 @@ function ProjectDetailDrawer({
   onOpenImage: (image: ProjectImage) => void;
 }) {
   const primaryImage = project.images[0];
+  const ref = useModal<HTMLElement>(onClose);
 
   return (
-    <div className="project-drawer-backdrop" role="dialog" aria-modal="true" aria-label={`${project.title} walkthrough`} onClick={onClose}>
-      <aside className="project-drawer" style={{ "--project-accent": project.accent } as React.CSSProperties} onClick={(event) => event.stopPropagation()}>
+    <div className="project-drawer-backdrop" onClick={onClose}>
+      <aside
+        className="project-drawer"
+        ref={ref}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${project.title} walkthrough`}
+        style={{ "--project-accent": project.accent } as React.CSSProperties}
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="drawer-topbar">
           <div>
             <span className="eyebrow">{project.eyebrow}</span>
@@ -597,9 +562,9 @@ function ProjectDetailDrawer({
         ) : null}
 
         <div className="story-panel story-panel-horizontal">
-          <StoryBlock label="why" text={project.story.why} />
-          <StoryBlock label="built" text={project.story.built} />
-          <StoryBlock label="proves" text={project.story.proves} />
+          <StoryBlock label="Problem solved" text={project.story.why} />
+          <StoryBlock label="What I built" text={project.story.built} />
+          <StoryBlock label="What it proves" text={project.story.proves} />
         </div>
 
         <div className="drawer-columns">

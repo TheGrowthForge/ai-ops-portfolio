@@ -1,0 +1,4 @@
+interface:
+  display_name: "Session Wrap"
+  short_description: "Capture portfolio handover state"
+  default_prompt: "Use $session-wrap to capture the current portfolio state and prepare the next session."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workspace Audit"
+  short_description: "Audit portfolio drift before publishing"
+  default_prompt: "Use $workspace-audit to sanity-check the portfolio before publishing or continuing work."

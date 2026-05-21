@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://luke-thomas-ai-ops-portfolio.netlify.app/sitemap.xml
