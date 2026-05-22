@@ -4,7 +4,6 @@ import {
   BrainCircuit,
   Download,
   Github,
-  Images,
   Linkedin,
   Mail,
   MoveRight,
@@ -18,7 +17,6 @@ import {
   type ProjectImage,
 } from "./projects";
 import { AISystemsStudio } from "./AISystemsStudio";
-import { InteractiveLab } from "./InteractiveLab";
 import { useModal } from "./useModal";
 
 const githubUrl = "https://github.com/TheGrowthForge";
@@ -73,10 +71,10 @@ function App() {
     <main>
       <SiteHeader />
       <HeroEvidenceBoard />
-      <AISystemsStudio />
       <FeaturedSystem project={featuredProject} onOpenImage={setLightboxImage} onOpenProject={setSelectedProject} />
       <ProjectGallery projects={projects} onOpenImage={setLightboxImage} onOpenProject={setSelectedProject} />
-      <InteractiveLab />
+      <AISystemsStudio />
+      <StackMetaSection />
       <ContactSection />
       {selectedProject ? (
         <ProjectDetailDrawer
@@ -99,9 +97,9 @@ function SiteHeader() {
       </a>
       <nav className="nav-links" aria-label="Primary navigation">
         <a href="#featured">Featured</a>
-        <a href="#studio">Studio</a>
         <a href="#projects">Projects</a>
-        <a href="#lab">Lab</a>
+        <a href="#studio">Studio</a>
+        <a href="#stack">Stack</a>
         <a href={githubUrl} target="_blank" rel="noreferrer">
           <Github size={16} aria-hidden="true" />
           GitHub
@@ -124,21 +122,20 @@ function SiteHeader() {
 }
 
 function HeroEvidenceBoard() {
-  const capabilityLabels = ["context architecture", "source review", "operating consoles", "product surfaces"];
+  const capabilityLabels = ["school policy OS", "date app", "command centre", "events console"];
 
   return (
     <section className="hero evidence-hero" id="top">
       <div className="hero-copy">
         <div>
-          <p className="eyebrow">Luke Thomas — AI operations &amp; workflow builder</p>
+          <p className="eyebrow">Luke Thomas — AI systems portfolio</p>
           <h1>Systems I built with AI, context, and code.</h1>
           <p>
-            I help teams turn AI from scattered experiments into working business processes — by
-            engineering the systems, not just the prompts. This is a lab of real, working surfaces,
-            built to be inspected rather than described.
+            A project lab of real working surfaces: public sites, private consoles, product
+            prototypes, and agent-ready workspaces. Built to be inspected.
           </p>
           <p className="availability-chip">
-            Open to AI operations, workflow &amp; applied-AI roles · Kent / London / remote
+            persistent context · source review · interface craft · human review
           </p>
         </div>
         <div>
@@ -149,12 +146,12 @@ function HeroEvidenceBoard() {
           </div>
           <div className="hero-actions">
             <a className="primary-action" href="#featured">
-              See the flagship build
+              Explore projects
               <MoveRight size={17} aria-hidden="true" />
             </a>
-            <a className="secondary-action" href={emailHref}>
-              <Mail size={17} aria-hidden="true" />
-              Get in touch
+            <a className="secondary-action" href="#studio">
+              <Sparkles size={17} aria-hidden="true" />
+              AI workspace
             </a>
           </div>
         </div>
@@ -172,7 +169,11 @@ function FeaturedSystem({
   onOpenImage: (image: ProjectImage) => void;
   onOpenProject: (project: Project) => void;
 }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const architectureIndex = Math.max(
+    project.images.findIndex((image) => image.caption.toLowerCase().includes("architecture")),
+    0,
+  );
+  const [activeIndex, setActiveIndex] = useState(architectureIndex);
   const activeImage = project.images[activeIndex] ?? project.images[0];
 
   return (
@@ -180,13 +181,40 @@ function FeaturedSystem({
       <div className="section-heading">
         <span className="eyebrow">{project.eyebrow}</span>
         <h2>{project.title}</h2>
-        <p>
-          The flagship system: public website, private dashboard, source-review workflow, call console, business
-          overview, and AI-aware workspace architecture.
-        </p>
       </div>
 
       <div className="featured-layout" style={{ "--project-accent": project.accent } as React.CSSProperties}>
+        <aside className="case-file-meta" aria-label="Flagship case file metadata">
+          <span className="case-file-label">case file</span>
+          <h3>Regulated AI operating system</h3>
+          <dl>
+            <div>
+              <dt>Domain</dt>
+              <dd>UK education · GDPR · AI policy</dd>
+            </div>
+            <div>
+              <dt>System</dt>
+              <dd>Public site + private operating layer</dd>
+            </div>
+            <div>
+              <dt>Stack</dt>
+              <dd>{project.stack.slice(0, 5).join(" · ")}</dd>
+            </div>
+          </dl>
+          <div className="case-file-actions">
+            {project.links?.map((link) => (
+              <a href={link.href} key={link.href} rel="noreferrer" target="_blank">
+                {link.label}
+                <ArrowUpRight size={15} aria-hidden="true" />
+              </a>
+            ))}
+            <button className="project-link-button" onClick={() => onOpenProject(project)} type="button">
+              Open case file
+              <MoveRight size={15} aria-hidden="true" />
+            </button>
+          </div>
+        </aside>
+
         <div className="featured-stage">
           <button className="image-button" onClick={() => onOpenImage(activeImage)} type="button">
             <BrowserFrame image={activeImage} large />
@@ -219,16 +247,6 @@ function FeaturedSystem({
           <WorkflowRail items={project.workflow ?? []} />
           <div className="stack-line">{project.stack.join(" / ")}</div>
           <div className="project-links">
-            {project.links?.map((link) => (
-              <a href={link.href} key={link.href} rel="noreferrer" target="_blank">
-                {link.label}
-                <ArrowUpRight size={15} aria-hidden="true" />
-              </a>
-            ))}
-            <button className="project-link-button" onClick={() => onOpenProject(project)} type="button">
-              Open walkthrough
-              <MoveRight size={15} aria-hidden="true" />
-            </button>
             <a href={caseStudyUrl}>
               Download case study
               <Download size={15} aria-hidden="true" />
@@ -249,30 +267,20 @@ function ProjectGallery({
   onOpenImage: (image: ProjectImage) => void;
   onOpenProject: (project: Project) => void;
 }) {
-  const columns = [
-    galleryProjects.filter((_, index) => index % 2 === 0),
-    galleryProjects.filter((_, index) => index % 2 === 1),
-  ];
-
   return (
     <section className="project-section" id="projects">
       <div className="section-heading compact">
         <span className="eyebrow">Selected project evidence</span>
-        <h2>Actual surfaces first. Architecture second.</h2>
-        <p>Each card leads with a real surface, then explains what the project does and what problem it solves.</p>
+        <h2>Project surfaces.</h2>
       </div>
       <div className="project-grid">
-        {columns.map((column, index) => (
-          <div className="project-column" key={index}>
-            {column.map((project) => (
-              <ProjectGalleryCard
-                key={project.slug}
-                project={project}
-                onOpenImage={onOpenImage}
-                onOpenProject={onOpenProject}
-              />
-            ))}
-          </div>
+        {galleryProjects.map((project) => (
+          <ProjectGalleryCard
+            key={project.slug}
+            project={project}
+            onOpenImage={onOpenImage}
+            onOpenProject={onOpenProject}
+          />
         ))}
       </div>
     </section>
@@ -296,12 +304,6 @@ function ProjectGalleryCard({
       className={`project-card project-card-${project.slug}${singleVisual ? " project-card-single-visual" : ""}`}
       style={{ "--project-accent": project.accent } as React.CSSProperties}
     >
-      <div className="project-card-header">
-        <span className="eyebrow">{project.eyebrow}</span>
-        <h3>{project.title}</h3>
-        <p>{project.purpose}</p>
-      </div>
-
       <div className="project-card-visual">
         {primaryImage ? (
           <button className="image-button" onClick={() => onOpenImage(primaryImage)} type="button">
@@ -312,7 +314,11 @@ function ProjectGalleryCard({
         )}
       </div>
 
-      <ProjectQuickRead project={project} compact />
+      <div className="project-card-header">
+        <span className="eyebrow">{project.eyebrow}</span>
+        <h3>{project.title}</h3>
+        <p>{project.purpose}</p>
+      </div>
 
       <div className="receipt-list">
         {project.proofPoints.slice(0, 3).map((receipt) => (
@@ -320,16 +326,13 @@ function ProjectGalleryCard({
         ))}
       </div>
 
-      {project.images.length > 1 ? <ScreenshotStrip images={project.images.slice(1, 4)} onOpenImage={onOpenImage} /> : null}
-      <div className="gallery-focus">
-        <Images size={16} aria-hidden="true" />
-        <span>{project.galleryFocus}</span>
+      <div className="project-card-footer">
+        <div className="stack-line">{project.stack.slice(0, 5).join(" / ")}</div>
+        <button className="walkthrough-button" onClick={() => onOpenProject(project)} type="button">
+          Inspect
+          <MoveRight size={16} aria-hidden="true" />
+        </button>
       </div>
-      <button className="walkthrough-button" onClick={() => onOpenProject(project)} type="button">
-        Inspect project
-        <MoveRight size={16} aria-hidden="true" />
-      </button>
-      <div className="stack-line">{project.stack.join(" / ")}</div>
     </article>
   );
 }
@@ -434,12 +437,9 @@ function ContactSection() {
   return (
     <footer className="contact-section" id="contact">
       <div className="contact-intro">
-        <span className="eyebrow">Get in touch</span>
-        <h2>Luke Thomas — AI operations &amp; workflow builder.</h2>
-        <p>
-          Open to AI operations, workflow, and applied-AI roles — Kent, London, or remote. The work above
-          is built to be inspected; project walkthroughs are available without exposing private repos.
-        </p>
+        <span className="eyebrow">Contact</span>
+        <h2>Luke Thomas.</h2>
+        <p>Project links, source, case study, and direct contact.</p>
       </div>
       <div className="contact-actions">
         <a href={githubUrl} target="_blank" rel="noreferrer">
@@ -462,6 +462,58 @@ function ContactSection() {
         </a>
       </div>
     </footer>
+  );
+}
+
+function StackMetaSection() {
+  const stackRows = [
+    {
+      label: "orchestration",
+      value: "Codex · Claude Code · context files · custom skills · review gates",
+    },
+    {
+      label: "frontend",
+      value: "React · Vite · Next.js · TypeScript · CSS systems",
+    },
+    {
+      label: "data",
+      value: "Supabase · PostgreSQL · CSV/Markdown sources · source registers",
+    },
+    {
+      label: "deploy",
+      value: "GitHub · Netlify · Vercel · build checks · public/private boundaries",
+    },
+  ];
+
+  const metaRows = [
+    "Portfolio source is public.",
+    "Project source repositories stay private where the work contains personal or live operating data.",
+    "Every public screenshot is selected as an artifact, not a data dump.",
+  ];
+
+  return (
+    <section className="stack-section" id="stack">
+      <div className="stack-panel">
+        <div className="stack-copy">
+          <span className="eyebrow">Build stack</span>
+          <h2>Context first. Interface second.</h2>
+          <p>Every project starts with the workspace: rules, source files, decisions, and review gates.</p>
+        </div>
+        <div className="stack-table" aria-label="Toolchain architecture">
+          {stackRows.map((row) => (
+            <div key={row.label}>
+              <strong>{row.label}</strong>
+              <span>{row.value}</span>
+            </div>
+          ))}
+        </div>
+        <div className="meta-strip" aria-label="Portfolio project metadata">
+          {metaRows.map((row) => (
+            <span key={row}>{row}</span>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 

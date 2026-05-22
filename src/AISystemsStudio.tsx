@@ -12,17 +12,16 @@ import {
   Sparkles,
   Terminal,
 } from "lucide-react";
-import { AgentSessionDemo } from "./AgentSessionDemo";
 
 type StudioStepKey = "brief" | "context" | "rules" | "build" | "review" | "ship";
 
 const comparisonRows = [
-  ["Blank chat box", "Project folder with working context"],
-  ["Repeated prompt tricks", "Persistent rules, docs, and decisions"],
-  ["One-off outputs", "Operating surfaces that keep state"],
-  ["Copy/paste workflow", "Tool-connected execution loop"],
-  ["Lost history", "Session wrap and handover memory"],
-  ["Hope the answer is right", "Source discipline and human review"],
+  ["Blank chat", "Project context"],
+  ["Prompt tricks", "Rules + decisions"],
+  ["One-off output", "Operating surface"],
+  ["Copy / paste", "Tool-connected loop"],
+  ["Lost history", "Session handover"],
+  ["Hope", "Source review"],
 ];
 
 const studioSteps: Array<{
@@ -35,49 +34,49 @@ const studioSteps: Array<{
   {
     key: "brief",
     label: "scope",
-    title: "Define the system before asking the model to work.",
+    title: "Define the system first.",
     body:
-      "The first job is not writing the perfect prompt. It is setting the boundary: what the workspace is, what it knows, what it can touch, and what must stay private.",
+      "Set the boundary: what the workspace knows, what it can touch, what stays private, and what counts as done.",
     log: ["define public / private boundary", "map current project state", "set output and review criteria"],
   },
   {
     key: "context",
     label: "context",
-    title: "Give the agent persistent project memory.",
+    title: "Give the agent project memory.",
     body:
-      "The model becomes much stronger when the workspace carries the business logic, architecture, prior decisions, proof assets, and current state before the next instruction is even written.",
+      "The workspace carries the architecture, decisions, proof assets, and current state before the next instruction is written.",
     log: ["read AGENTS.md", "read context/handover.md", "load project rules", "map src + public/proof"],
   },
   {
     key: "rules",
     label: "rules",
-    title: "Turn repeated judgement into workspace rules.",
+    title: "Make judgement reusable.",
     body:
-      "If a constraint matters more than once, it should live in the workspace: no deploy without review, preserve other agents' work, audit proof assets, wrap the session for continuity.",
+      "Constraints that matter more than once become workspace rules: audit proof assets, preserve parallel work, wrap the session.",
     log: ["load /workspace-audit", "load /session-wrap", "enforce no-deploy-without-approval"],
   },
   {
     key: "build",
     label: "build",
-    title: "Use agents as builders, not chat boxes.",
+    title: "Build the surface.",
     body:
-      "The work then becomes normal engineering: components, data models, screenshots, CSS systems, browser QA, privacy scans, and deployment discipline.",
+      "Components, data models, screenshots, CSS systems, browser QA, privacy scans, and deployment discipline.",
     log: ["implement scoped component", "preserve parallel edits", "test rendered interface"],
   },
   {
     key: "review",
     label: "review",
-    title: "Put a gate between model output and reality.",
+    title: "Hold the review gate.",
     body:
-      "The point is not autonomous chaos. The point is leverage with control: source review, visual QA, build checks, privacy scanning, and human sign-off before public output.",
+      "Source review, visual QA, build checks, privacy scanning, and human sign-off before public output.",
     log: ["npm run build", "asset references exist", "privacy scan", "manual screenshot review"],
   },
   {
     key: "ship",
     label: "ship",
-    title: "Ship from an understood workspace.",
+    title: "Ship with memory.",
     body:
-      "The output is not a lucky answer from a clever prompt. It is a shipped surface produced by a workspace that holds context, constraints, tools, and review memory.",
+      "The next session inherits context, constraints, tools, and review memory instead of starting again.",
     log: ["commit intentionally", "push after approval", "deploy after approval", "record handover"],
   },
 ];
@@ -120,14 +119,12 @@ export function AISystemsStudio() {
           <span className="eyebrow">Beyond prompting</span>
           <h2>The workspace is the prompt.</h2>
           <p>
-            Most people still use AI transactionally: blank box, clever prompt, isolated output, reset.
-            My approach is to build persistent AI workspaces where the model has project context before
-            it acts.
+            The strongest AI work happens inside project folders with context, rules, decisions,
+            source files, proof assets, and review gates already in place.
           </p>
           <p>
-            The portfolio itself is part of that proof: real project surfaces, agent rules, source
-            discipline, local skills, review gates, and a public/private boundary designed into the
-            workspace.
+            This portfolio is built the same way: real project surfaces, private source boundaries,
+            agent rules, local skills, and public proof assets.
           </p>
           <div className="studio-receipts" aria-label="AI systems studio receipts">
             <span>persistent context</span>
@@ -135,7 +132,7 @@ export function AISystemsStudio() {
             <span>tool-connected workflows</span>
             <span>human review gates</span>
           </div>
-          <blockquote>AI should not be used like a slot machine.</blockquote>
+          <blockquote>Prompts are inputs. Workspaces are systems.</blockquote>
         </div>
 
         <div className="studio-console" aria-label="AI-native build loop">
@@ -143,14 +140,14 @@ export function AISystemsStudio() {
             <span />
             <span />
             <span />
-            <strong>prompting versus workspace architecture</strong>
+            <strong>chat box versus workspace</strong>
           </div>
 
           <div className="studio-comparison" aria-label="Transactional AI compared with AI-native workspaces">
             <div className="studio-compare-col is-weak">
               <div className="studio-compare-head">
                 <CircleSlash size={15} aria-hidden="true" />
-                <strong>prompt slot machine</strong>
+                <strong>transactional AI</strong>
               </div>
               {comparisonRows.map(([weak]) => (
                 <span key={weak}>{weak}</span>
@@ -231,7 +228,7 @@ export function AISystemsStudio() {
             <LockKeyhole size={18} aria-hidden="true" />
             <div>
               <span className="eyebrow">What this demonstrates</span>
-              <h3>Architecture around AI, not prompt collection.</h3>
+              <h3>Architecture around AI.</h3>
             </div>
           </div>
           {capabilityCards.map((card) => (
@@ -241,18 +238,6 @@ export function AISystemsStudio() {
             </article>
           ))}
         </aside>
-      </div>
-
-      <div className="studio-session-demo">
-        <div className="studio-session-copy">
-          <span className="eyebrow">Governed agent session</span>
-          <h3>What the working loop looks like in practice.</h3>
-          <p>
-            The build loop above is the architecture. This is the session behaviour: context read,
-            rule check, blocked risky action, human review, and handover.
-          </p>
-        </div>
-        <AgentSessionDemo />
       </div>
     </section>
   );

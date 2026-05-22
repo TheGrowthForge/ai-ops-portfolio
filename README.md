@@ -1,6 +1,6 @@
 # AI/Ops Portfolio
 
-Sanitized public portfolio for selected AI operations, workflow, dashboard, and operating-system projects.
+Public portfolio for selected AI, workflow, dashboard, and operating-system projects.
 
 Live site: https://luke-thomas-ai-ops-portfolio.netlify.app
 

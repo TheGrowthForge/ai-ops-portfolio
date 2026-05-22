@@ -35,16 +35,16 @@ export const featuredProject: Project = {
   title: "UK School AI Policy — Operating System",
   eyebrow: "Flagship build",
   purpose:
-    "A public marketing site wired to five private operating surfaces — dashboard, business overview, call console, architecture map, and a source-review workflow — for a regulated advisory business.",
-  accent: "#ad3f17",
+    "A public site plus private operating surfaces: dashboard, business overview, call console, architecture map, and source-review workflow.",
+  accent: "#0ea5e9",
   stack: ["Static HTML", "Netlify", "Formspree", "Attio", "Apollo", "AI agents", "Markdown"],
   story: {
     why:
-      "AI guidance for UK schools is scattered across several regulators and changes often. I built an operating system that turns that ambiguity into repeatable work: sources, claims, decisions, outreach, and delivery all visible in one place.",
+      "UK school AI guidance is scattered across regulators. The system turns that ambiguity into visible sources, claims, decisions, outreach, and delivery.",
     built:
-      "A public-facing site for the offer, plus private surfaces for workstream state, source discipline, call preparation, business overview, and agent-assisted drafting.",
+      "A public-facing site plus private surfaces for workstream state, source discipline, call preparation, business overview, and agent-assisted drafting.",
     proves:
-      "It shows I can take a regulated, ambiguous domain and stand up the whole operating system — public site, internal surfaces, source discipline, human review — not just a single document.",
+      "A regulated domain turned into a working operating system: public site, internal surfaces, source discipline, and human review.",
   },
   buildDetails: [
     "Public marketing site for the offer and lead capture.",
@@ -52,7 +52,7 @@ export const featuredProject: Project = {
     "Call console and source-review workflow for day-to-day execution.",
   ],
   proofPoints: [
-    "One public marketing site plus five private operating surfaces, all live.",
+    "One public site plus five private operating surfaces.",
     "Every regulatory claim tracked in a source register and a claims register.",
     "AI agents draft and structure; claims and policy language clear human review before release.",
   ],
@@ -121,15 +121,15 @@ export const projects: Project[] = [
     slug: "date-app",
     title: "Date App Prototype",
     eyebrow: "Product prototype",
-    purpose:
-      "A private Next.js/Supabase product prototype with shared planning, deck flows, ideas, memories, notes, and motion-led interaction surfaces — a deliberately different style from the ops consoles.",
-    accent: "#a14b54",
+  purpose:
+      "A private Next.js/Supabase product prototype for shared planning, ideas, memories, notes, and motion-led interaction surfaces.",
+    accent: "#e11d48",
     stack: ["Next.js", "React", "TypeScript", "Supabase", "Tailwind", "Motion", "Netlify"],
     story: {
       why:
-        "Shared plans, memories, notes, and date ideas usually live across chats, lists, and photo rolls. The prototype explores what a more intentional shared product surface could feel like.",
+        "Shared plans, memories, notes, and date ideas usually live across chats, lists, and photo rolls.",
       built:
-        "A private Next.js/Supabase app with shared planning routes, idea and deck flows, memories, notes, profile settings, storage, and motion-led UI.",
+        "A private Next.js/Supabase app with planning routes, idea and deck flows, memories, notes, profile settings, storage, and motion-led UI.",
       proves:
         "It shows range: routed product surfaces and database-backed features, not only internal tools.",
     },
@@ -178,14 +178,14 @@ export const projects: Project[] = [
     title: "Personal Command Centre",
     eyebrow: "Operating system",
     purpose:
-      "A hosted personal operating layer for orienting, reviewing, and acting across active goals, notes, reference material, routines, and business/personal contexts.",
-    accent: "#c8922d",
+      "A hosted personal operating layer for goals, notes, reference material, routines, review, and action.",
+    accent: "#22c55e",
     stack: ["Next.js", "Supabase", "React", "TypeScript", "Tailwind", "Hosted beta"],
     story: {
       why:
-        "Most personal productivity systems collapse because context, decisions, review queues, and action surfaces live in different places. I built one command layer to keep orientation and execution together.",
+        "Productivity systems break when context, decisions, review queues, and action surfaces live in different places.",
       built:
-        "A hosted command centre with personal/business shells, goal stacks, notes, reference surfaces, routine modules, and a review queue backed by structured data.",
+        "A hosted command centre with personal/business shells, goal stacks, notes, reference surfaces, routines, and review queues.",
       proves:
         "It shows I treat my own life and work like a designed operating system: persistent context, routed surfaces, and clean action loops.",
     },
@@ -224,16 +224,16 @@ export const projects: Project[] = [
     title: "Opportunity Pipeline Console",
     eyebrow: "Workflow console",
     purpose:
-      "A private React/Vite console pattern for turning a messy, multi-source opportunity pipeline into daily actions, priority lanes, research prompts, and follow-up loops.",
-    accent: "#75702c",
+      "A private React/Vite console pattern for multi-source pipeline work: actions, priority lanes, research prompts, and follow-up loops.",
+    accent: "#f59e0b",
     stack: ["React", "Vite", "TypeScript", "CSS", "CSV parsing", "Markdown"],
     story: {
       why:
-        "High-context opportunity work scatters across tabs, notes, spreadsheets, and AI chats. The console pattern turns that sprawl into one visible operating rhythm.",
+        "High-context pipeline work scatters across tabs, notes, spreadsheets, and AI chats.",
       built:
-        "A local React/Vite control room pattern for daily actions, queue state, research notes, outreach prompts, and follow-up cadence backed by source CSV and Markdown files.",
+        "A local React/Vite console for daily actions, queue state, research notes, prompts, and follow-up cadence backed by CSV and Markdown.",
       proves:
-        "It shows I build tools around real workflows quickly, and I keep the source-of-truth files close to the interface.",
+        "A reusable console pattern with source files close to the interface.",
     },
     buildDetails: [
       "Reads source CSV and Markdown files directly as display surfaces.",
@@ -243,7 +243,7 @@ export const projects: Project[] = [
     proofPoints: [
       "A working local app, not a static mockup.",
       "No separate database — it reads source files directly, so the interface can't quietly drift.",
-      "Useful as a reusable console pattern for research, sales, customer success, or operations pipelines.",
+      "Reusable console pattern for research, operations, and delivery pipelines.",
     ],
     galleryFocus: "Private console pattern; public portfolio shows the architecture rather than the live data surface.",
     walkthroughNotes: [
@@ -267,12 +267,12 @@ export const projects: Project[] = [
     title: "Events / Research Console",
     eyebrow: "Research surface",
     purpose:
-      "A single-file local console that ranks events and research leads with filters, score rings, map context, public source links, and clear action cues.",
-    accent: "#b06a1e",
+      "A single-file local console for ranked research, filters, map context, source links, and action cues.",
+    accent: "#06b6d4",
     stack: ["HTML", "CSS", "JavaScript", "Leaflet", "Public event sources"],
     story: {
       why:
-        "Event and lead research gets wasted when useful opportunities sit in a pile of tabs. This console turns public-source research into a ranked queue that can be compared and acted on.",
+        "Event and research work gets wasted when useful opportunities sit in a pile of tabs.",
       built:
         "A local map-and-card interface with filters, scoring, location context, source links, and visible action cues — all in one portable file.",
       proves:
