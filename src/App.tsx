@@ -169,11 +169,7 @@ function FeaturedSystem({
   onOpenImage: (image: ProjectImage) => void;
   onOpenProject: (project: Project) => void;
 }) {
-  const architectureIndex = Math.max(
-    project.images.findIndex((image) => image.caption.toLowerCase().includes("architecture")),
-    0,
-  );
-  const [activeIndex, setActiveIndex] = useState(architectureIndex);
+  const [activeIndex, setActiveIndex] = useState(0);
   const activeImage = project.images[activeIndex] ?? project.images[0];
 
   return (
